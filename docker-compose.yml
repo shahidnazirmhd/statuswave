@@ -1,0 +1,33 @@
+services:
+  pgadmin:
+    image: dpage/pgadmin4:8.10
+    container_name: pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@pgadmin.org
+      PGADMIN_DEFAULT_PASSWORD: passpgadmin     
+      PGADMIN_CONFIG_WTF_CSRF_HEADERS: '["Referer", "Origin"]'
+      PGADMIN_CONFIG_WTF_CSRF_ENABLED: 'False'
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    ports:
+      - 5050:80
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16.4
+    container_name: moraceae-db-master
+    restart: always          
+    environment: 
+      POSTGRES_USER: sa
+      POSTGRES_PASSWORD: passpgsql
+      POSTGRES_DB: moraceae
+      #POSTGRES_HOST_AUTH_METHOD: "trust"
+    volumes:                 
+      - pg-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+volumes:
+  pgadmin-data:
+  pg-data:
