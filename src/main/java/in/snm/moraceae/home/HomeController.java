@@ -22,4 +22,14 @@ public class HomeController {
     public String landPage(){
     return "land";
     }
+
+    @GetMapping("/invalid")
+    public String invalidSession() {
+        return "error/session/invalid_session";
+    }
+
+    @GetMapping("/expired")
+    public String sessionExpired() {
+        return "error/session/session_expired";
+    }
 }
