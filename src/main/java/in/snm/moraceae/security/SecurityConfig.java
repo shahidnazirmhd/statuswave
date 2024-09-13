@@ -17,19 +17,17 @@ import org.springframework.security.web.SecurityFilterChain;
 // @EnableMethodSecurity(securedEnabled = true)
 public class SecurityConfig {
 
-    // private static final String[] WHITE_LIST_URL = {
-    //         "/about/*",
-    //         "/css/*",
-    //         "/js/*",
-    //         "/*",
-    //         "index",
-    //     };
+    private static final String[] WHITE_LIST_URL = {
+            "/css/*",
+            "/js/*",
+            "/",
+        };
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
         .authorizeHttpRequests((requests) -> requests
-				.requestMatchers("/").permitAll()
+				.requestMatchers(WHITE_LIST_URL).permitAll()
 				.anyRequest()
                 .authenticated()
 			)
