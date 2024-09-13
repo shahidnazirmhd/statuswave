@@ -1,17 +1,23 @@
-/* Error: Can't find stylesheet to import.
- *   ,
- * 6 | @import "node_modules/bootstrap/scss/bootstrap.scss";
- *   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
- *   '
- *   src/main/resources/static/scss/custom.scss 6:9  root stylesheet */
-
-body::before {
-  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
-      "Droid Sans Mono", monospace, monospace;
-  white-space: pre;
-  display: block;
-  padding: 1em;
-  margin-bottom: 1em;
-  border-bottom: 2px solid black;
-  content: "Error: Can't find stylesheet to import.\a   \2577 \a 6 \2502  @import \"node_modules/bootstrap/scss/bootstrap.scss\";\a   \2502          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\a   \2575 \a   src/main/resources/static/scss/custom.scss 6:9  root stylesheet";
-}
+/* custom.css */
+:root {
+    --bs-primary: #28a745;        /* Custom primary color (green) */
+    --bs-secondary: #ffc107;      /* Custom secondary color (yellow) */
+    --bs-success: #66c1ec;        /* Custom success color (darker green) */
+    --bs-danger: #dc3545;         /* Danger color */
+    --bs-warning: #ffc107;        /* Warning color */
+    --bs-info: #1757b8;           /* Info color */
+    --bs-light: #f8f9fa;          /* Light color (light grey) */
+    --bs-dark: #343a40;           /* Dark color (dark grey) */
+  }
+  
+  /* Explicitly override styles for .btn-outline-success */
+  .btn-outline-success {
+    color: var(--bs-success); /* Text color */
+    border-color: var(--bs-success); /* Border color */
+  }
+  
+  .btn-outline-success:hover {
+    color: #ffffff; /* Text color on hover */
+    background-color: var(--bs-success); /* Background color on hover */
+    border-color: var(--bs-success); /* Border color on hover */
+  }
