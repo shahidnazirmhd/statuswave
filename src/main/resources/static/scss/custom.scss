@@ -1,8 +1,13 @@
 
-$primary:       #0dd1fd;
-$secondary:     #eeacff;
-$success:       #4afde8;
-$info:          #d1fd0d;
+$primary:       #112D4E;
+$secondary:     #3F72AF;
 $body-bg:       #EEEEEE;
 
 @import '../../../../../node_modules/bootstrap/scss/bootstrap';
+
+:root {
+    --primary-color: #112D4E;
+    --secondary-color: #3F72AF;
+    --tertiary-color: #DBE2EF;
+    --Quaternary-color: #F9F7F7;
+  }

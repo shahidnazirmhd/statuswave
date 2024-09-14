@@ -6,6 +6,7 @@
     <script src="/js/bootstrap.bundle.min.js" defer></script>
     <!-- <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" /> -->
     <link th:href="@{/css/custom.css}" rel="stylesheet" />
+    <link th:href="@{/css/bootstrap-icons.min.css}" rel="stylesheet" />
     <title>Home</title>
 </head>
 <body>
@@ -39,7 +40,11 @@
             </li>
           </ul>
           <div class="d-lg-flex col-lg-3 justify-content-lg-end">
-            <button class="btn btn-outline-success">Button</button>
+            <!-- <button class="btn btn-outline-secondary">Button</button> -->
+            <button class="btn btn-outline-secondary d-inline-flex align-items-center" type="button">
+              Login
+              <i class="bi bi-arrow-right-short"></i>
+            </button>
           </div>
         </div>
       </div>
