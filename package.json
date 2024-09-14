@@ -1,0 +1,21 @@
+{
+  "name": "moraceae",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-css": "sass src/main/resources/static/scss/custom.scss | postcss --use autoprefixer -o src/main/resources/static/css/custom.css",
+    "watch-css": "sass --watch src/main/resources/static/scss/custom.scss | postcss --use autoprefixer -o src/main/resources/static/css/custom.css"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "autoprefixer": "^10.4.20",
+    "bootstrap": "^5.3.3",
+    "postcss": "^8.4.45",
+    "postcss-cli": "^11.0.0",
+    "sass": "^1.78.0"
+  }
+}
