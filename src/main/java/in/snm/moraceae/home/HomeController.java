@@ -2,25 +2,45 @@ package in.snm.moraceae.home;
 
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 
 @Controller
 public class HomeController {
 
     @GetMapping("/")
-    public String indexPage(){
-    return "index";
+    public String homePage(HttpServletRequest request, Model model) {
+        model.addAttribute("isHomePage", request.getRequestURI().equals("/"));
+        return "index"; // Your view name
     }
 
     @GetMapping("/login")
-    public String loginPage(){
+    public String loginPage(HttpServletRequest request, Model model){
     return "login";
     }
 
     @GetMapping("/land")
     public String landPage(){
     return "land";
+    }
+
+    @GetMapping("/error")
+    public String handleError(HttpServletRequest request, Model model) {
+        // Extract error information
+        Object status = request.getAttribute("javax.servlet.error.status_code");
+        Object message = request.getAttribute("javax.servlet.error.message");
+        Object exception = request.getAttribute("javax.servlet.error.exception");
+
+        // Add error details to the model
+        model.addAttribute("status", status);
+        model.addAttribute("message", message);
+        model.addAttribute("exception", exception);
+
+        return "error/error"; // Thymeleaf template name
     }
 
     @GetMapping("/invalid")

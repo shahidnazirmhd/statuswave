@@ -1,24 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en" data-bs-theme="auto">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="/js/bootstrap.bundle.min.js" defer></script>
-    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
-    <link th:href="@{/css/custom.css}" rel="stylesheet" />
-    <title>Login</title>
-    <style>
-        .gradient-div {
-            background: rgb(17,45,78);
-            background: linear-gradient(140deg, rgba(17,45,78,1) 0%, rgba(63,114,175,1) 35%, rgba(219,226,239,1) 100%);
-            /* padding: 8rem; */
-            /* min-height: 100vh;  Ensure gradient covers full height */
-        }
-       
-    </style>
-</head>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-spring5" data-bs-theme="auto">
+<head th:insert="fragments/head"></head>
 <body>
-    <div class="container-fluid min-vh-100 gradient-div">
+    <header th:insert="fragments/header"></header>
+    <div class="container-fluid min-vh-100 gradient-main">
         <div class="row">
             <div class="col-md-8 p-5 text-secondary">
               <h1 class="text-white display-1">moraceae.</h1>
@@ -33,13 +18,17 @@
         
             <!-- Right side (Jumbotron) -->
             <div class="d-flex col-md-4 p-5 min-vh-100">
-                <div class="container-fluid p-3 mt-3 align-self-center bg-white rounded">
-                    <div th:if="${param.error}">
-                        <p class="text-danger" th:text="${session.SPRING_SECURITY_LAST_EXCEPTION.message}"></p>
-                    </div>
-                    <div th:if="${param.logout}">
-                        <p class="text-success">You have been logged out.</p>
-                    </div>
+                <div class="container p-3 align-self-center bg-white rounded">
+                    <div>
+                        <!-- Default empty p tag -->
+                        <p th:unless="${param.error} or ${param.logout}">&nbsp;</p>
+                        
+                        <!-- Error message -->
+                        <p class="text-danger" th:if="${param.error}" th:text="${session.SPRING_SECURITY_LAST_EXCEPTION.message}"></p>
+                        
+                        <!-- Logout message -->
+                        <p class="text-success" th:if="${param.logout}">You have been logged out.</p>
+                    </div>                  
                     <form th:action="@{/login}" method="post">
                         <div class="form-floating mb-3 mt-3">
                             <input type="text" class="form-control" name="username" id="user" placeholder="Enter your username" required/>
@@ -49,8 +38,8 @@
                             <input type="password" class="form-control" name="password" id="pass" placeholder="Enter your password" required/>
                             <label class="form-label" for="pass">Password</label>
                         </div>
-                        <div>
-                            <input type="submit" class="btn btn-primary w-50" value="Sign In"/>
+                        <div class="text-center">
+                            <input type="submit" class="btn btn-primary" value="Login"/>
                         </div>
                     </form>
                 </div>

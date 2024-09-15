@@ -33,6 +33,7 @@ public class SecurityConfig {
 			)
 			.formLogin((form) -> form
 				.loginPage("/login")
+                .defaultSuccessUrl("/land", true)
 				.permitAll()
             )
     .sessionManagement((sessions) -> sessions
