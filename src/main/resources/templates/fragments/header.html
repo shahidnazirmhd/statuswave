@@ -8,13 +8,13 @@
             <a class="navbar-brand col-lg-3 me-0" th:href="@{/}">moraceae</a>
             <ul class="navbar-nav col-lg-6 justify-content-lg-center">
               <li class="nav-item">
-                <a class="nav-link" th:href="@{/}" th:classappend="${requestURI == '/' ? ' active' : ''}">Home</a>
+                <a class="nav-link" th:href="@{/}" th:classappend="${requestURI == '/' ? ' active text-decoration-underline text-secondary' : ''}">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/products}" th:classappend="${requestURI == '/products' ? ' active' : ''}">Products</a>
+                <a class="nav-link" th:href="@{/products}" th:classappend="${requestURI == '/products' ? ' active text-decoration-underline text-secondary' : ''}">Products</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/community}" th:classappend="${requestURI == '/community' ? ' active' : ''}">Community</a>
+                <a class="nav-link" th:href="@{/community}" th:classappend="${requestURI == '/community' ? ' active text-decoration-underline text-secondary' : ''}">Community</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Resources</a>

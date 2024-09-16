@@ -14,18 +14,35 @@ public class HomeController {
 
     @GetMapping("/")
     public String homePage(HttpServletRequest request, Model model) {
+        model.addAttribute("pageTitle", "Home");
         model.addAttribute("requestURI", request.getRequestURI());
         return "index"; 
     }
 
+    @GetMapping("/products")
+    public String productPage(HttpServletRequest request, Model model) {
+        model.addAttribute("pageTitle", "Products");
+        model.addAttribute("requestURI", request.getRequestURI());
+        return "products"; 
+    }
+
+    @GetMapping("/community")
+    public String communityPage(HttpServletRequest request, Model model) {
+        model.addAttribute("pageTitle", "Community");
+        model.addAttribute("requestURI", request.getRequestURI());
+        return "community"; 
+    }
+
     @GetMapping("/login")
     public String loginPage(HttpServletRequest request, Model model) {
+        model.addAttribute("pageTitle", "Login");
         model.addAttribute("requestURI", request.getRequestURI());
     return "login";
     }
 
     @GetMapping("/land")
     public String landPage(HttpServletRequest request, Model model){
+        model.addAttribute("pageTitle", "Land");
         model.addAttribute("requestURI", request.getRequestURI()); 
     return "land";
     }
@@ -38,6 +55,7 @@ public class HomeController {
         Object exception = request.getAttribute("javax.servlet.error.exception");
 
         // Add error details to the model
+        model.addAttribute("pageTitle", "Error");
         model.addAttribute("status", status);
         model.addAttribute("message", message);
         model.addAttribute("exception", exception);
