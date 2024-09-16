@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-spring5" data-bs-theme="auto">
-<head th:insert="fragments/head"></head>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-spring5" lang="en">
+    <head th:insert="~{fragments/head :: head}"></head>
 <body>
-    <header th:insert="fragments/header"></header>
+    <header th:insert="~{fragments/header :: header}"></header>
     <div class="container-fluid min-vh-100 gradient-main">
         <div class="row">
             <div class="col-md-8 p-5 text-secondary">

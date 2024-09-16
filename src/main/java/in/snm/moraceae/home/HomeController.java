@@ -14,17 +14,19 @@ public class HomeController {
 
     @GetMapping("/")
     public String homePage(HttpServletRequest request, Model model) {
-        model.addAttribute("isHomePage", request.getRequestURI().equals("/"));
-        return "index"; // Your view name
+        model.addAttribute("requestURI", request.getRequestURI());
+        return "index"; 
     }
 
     @GetMapping("/login")
-    public String loginPage(HttpServletRequest request, Model model){
+    public String loginPage(HttpServletRequest request, Model model) {
+        model.addAttribute("requestURI", request.getRequestURI());
     return "login";
     }
 
     @GetMapping("/land")
-    public String landPage(){
+    public String landPage(HttpServletRequest request, Model model){
+        model.addAttribute("requestURI", request.getRequestURI()); 
     return "land";
     }
 
@@ -39,6 +41,7 @@ public class HomeController {
         model.addAttribute("status", status);
         model.addAttribute("message", message);
         model.addAttribute("exception", exception);
+        model.addAttribute("requestURI", request.getRequestURI());
 
         return "error/error"; // Thymeleaf template name
     }
