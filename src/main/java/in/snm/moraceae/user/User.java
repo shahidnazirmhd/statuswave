@@ -80,4 +80,15 @@ public class User implements UserDetails, Principal {
     public String getName() {
         return email;
     }
+
+    public String getFullName() {
+        return firstname + " " + lastname;
+    }
+
+    public String getNameWithInitial() {
+        if (lastname != null && !lastname.isEmpty()) {
+            return firstname + " " + lastname.charAt(0) + ".";
+        }
+        return firstname;
+    }
 }
