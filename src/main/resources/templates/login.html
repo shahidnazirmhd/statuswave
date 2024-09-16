@@ -1,50 +1,50 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-spring5" lang="en">
-    <head th:insert="~{fragments/head :: head}"></head>
+    <head th:replace="~{fragments/head :: head}"></head>
 <body>
-    <header th:insert="~{fragments/header :: header}"></header>
-    <div class="container-fluid min-vh-100 gradient-main">
-        <div class="row">
-            <div class="col-md-8 p-5 text-secondary">
-              <h1 class="text-white display-1">moraceae.</h1>
-              <p class="h4" style="color: var(--tertiary-color);">Lorem ipsum odor amet, consectetuer adipiscing elit.<br> 
-                Orci nullam cras lobortis ultrices ultricies et mattis eget.<br>
-                Proin dictum sollicitudin montes ullamcorper elementum eleifend ornare.<br>
-                Massa suscipit hendrerit dolor dictum magna fusce gravida risus orci.<br>Ac finibus blandit; eget urna leo cursus.</p>
-              <p class="h5" style="color: var(--tertiary-color);">Lorem ipsum odor amet, consectetuer adipiscing elit. Gravida enim primis dictumst; luctus ullamcorper magnis.<br> 
-                Risus diam penatibus conubia lacus fermentum aliquet. 
-                Ante placerat mi tempor, fermentum scelerisque erat duis.</p>  
-            </div>
-        
-            <!-- Right side (Jumbotron) -->
-            <div class="d-flex col-md-4 p-5 min-vh-100">
-                <div class="container p-3 align-self-center bg-white rounded">
-                    <div>
-                        <!-- Default empty p tag -->
-                        <p th:unless="${param.error} or ${param.logout}">&nbsp;</p>
-                        
-                        <!-- Error message -->
-                        <p class="text-danger" th:if="${param.error}" th:text="${session.SPRING_SECURITY_LAST_EXCEPTION.message}"></p>
-                        
-                        <!-- Logout message -->
-                        <p class="text-success" th:if="${param.logout}">You have been logged out.</p>
-                    </div>                  
-                    <form th:action="@{/login}" method="post">
-                        <div class="form-floating mb-3 mt-3">
-                            <input type="text" class="form-control" name="username" id="user" placeholder="Enter your username" required/>
-                            <label class="form-label" for="user">Username</label>
-                        </div>
-                        <div class="form-floating mb-3 mt-3">
-                            <input type="password" class="form-control" name="password" id="pass" placeholder="Enter your password" required/>
-                            <label class="form-label" for="pass">Password</label>
-                        </div>
-                        <div class="text-center">
-                            <input type="submit" class="btn btn-primary" value="Login"/>
-                        </div>
-                    </form>
+    <header th:replace="~{fragments/header :: header}"></header>
+    <main>
+        <div class="container-fluid gradient-main">
+            <div class="row p-5">
+                <div class="col-md-8 text-secondary">
+                  <h1 class="text-white display-1">moraceae.</h1>
+                  <p class="h4" style="color: var(--tertiary-color);">Lorem ipsum odor amet, consectetuer adipiscing elit.<br> 
+                    Orci nullam cras lobortis ultrices ultricies et mattis eget.<br>
+                    Proin dictum sollicitudin montes ullamcorper elementum eleifend ornare.<br>
+                    Massa suscipit hendrerit dolor dictum magna fusce gravida risus orci.<br>Ac finibus blandit; eget urna leo cursus.</p>
+                  <p class="h5" style="color: var(--tertiary-color);">Lorem ipsum odor amet, consectetuer adipiscing elit. Gravida enim primis dictumst; luctus ullamcorper magnis.<br> 
+                    Risus diam penatibus conubia lacus fermentum aliquet. 
+                    Ante placerat mi tempor, fermentum scelerisque erat duis.</p>  
                 </div>
-            </div>
+                <div class="d-flex col-md-4">
+                    <div class="container p-3 align-self-center bg-white rounded">
+                        <div>
+                            <!-- Default empty p tag -->
+                            <p th:unless="${param.error} or ${param.logout}">&nbsp;</p>
+                            
+                            <!-- Error message -->
+                            <p class="text-danger" th:if="${param.error}" th:text="${session.SPRING_SECURITY_LAST_EXCEPTION.message}"></p>
+                            
+                            <!-- Logout message -->
+                            <p class="text-success" th:if="${param.logout}">You have been logged out.</p>
+                        </div>                  
+                        <form th:action="@{/login}" method="post">
+                            <div class="form-floating mb-3 mt-3">
+                                <input type="text" class="form-control form-control-sm" name="username" id="user" placeholder="Enter your username" required/>
+                                <label class="form-label" for="user">Username</label>
+                            </div>
+                            <div class="form-floating mb-3 mt-3">
+                                <input type="password" class="form-control form-control-sm" name="password" id="pass" placeholder="Enter your password" required/>
+                                <label class="form-label" for="pass">Password</label>
+                            </div>
+                            <div class="text-center">
+                                <input type="submit" class="btn btn-primary" value="Login"/>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+              </div>
           </div>
-      </div>
+    </main>
 </body>
 </html>
