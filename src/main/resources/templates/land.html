@@ -2,6 +2,62 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-spring5" lang="en">
     <head th:replace="~{fragments/head :: head}"></head>
 <body>
-    <header th:replace="~{fragments/header :: header}"></header>
+    <header>
+        <div class="d-flex flex-column flex-shrink-0 bg-body-tertiary vh-100 col-2">
+            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+              <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+              <span class="fs-4 d-none d-md-inline">Sidebar</span>
+            </a>
+            <hr>
+            <ul class="nav nav-pills flex-column mb-auto">
+              <li class="nav-item">
+                <a href="#" class="nav-link active" aria-current="page" title="Home" data-bs-toggle="tooltip" data-bs-placement="right">
+                  <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"/></svg>
+                  <span class="d-none d-md-inline">Home</span>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="nav-link link-body-emphasis" title="Dashboard" data-bs-toggle="tooltip" data-bs-placement="right">
+                  <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
+                  <span class="d-none d-md-inline">Dashboard</span>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="nav-link link-body-emphasis" title="Orders" data-bs-toggle="tooltip" data-bs-placement="right">
+                  <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"/></svg>
+                  <span class="d-none d-md-inline">Orders</span>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="nav-link link-body-emphasis" title="Products" data-bs-toggle="tooltip" data-bs-placement="right">
+                  <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
+                  <span class="d-none d-md-inline">Products</span>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="nav-link link-body-emphasis" title="Customers" data-bs-toggle="tooltip" data-bs-placement="right">
+                  <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
+                  <span class="d-none d-md-inline">Customers</span>
+                </a>
+              </li>
+            </ul>
+            <hr>
+            <div class="dropdown">
+              <a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle me-2">
+                <strong class="d-none d-md-inline">mdo</strong>
+              </a>
+              <ul class="dropdown-menu text-small shadow">
+                <li><a class="dropdown-item" href="#">New project...</a></li>
+                <li><a class="dropdown-item" href="#">Settings</a></li>
+                <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#">Sign out</a></li>
+              </ul>
+            </div>
+          </div>
+          
+    </header>
+    
 </body>
 </html>
