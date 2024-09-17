@@ -1,6 +1,9 @@
 package in.snm.moraceae.home;
 
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -47,30 +50,39 @@ public class HomeController {
     return "land";
     }
 
-    @GetMapping("/error")
-    public String handleError(HttpServletRequest request, Model model) {
-        // Extract error information
-        Object status = request.getAttribute("javax.servlet.error.status_code");
-        Object message = request.getAttribute("javax.servlet.error.message");
-        Object exception = request.getAttribute("javax.servlet.error.exception");
+    // @GetMapping("/error")
+    // public String handleError(HttpServletRequest request, Model model) {
+    //     Class<?> exceptionType = (Class<?>) request.getAttribute("javax.servlet.error.exception_type");
+    //     Integer statusCode = (Integer) request.getAttribute("javax.servlet.error.status_code");
+    //     String errorMessage = (String) request.getAttribute("javax.servlet.error.message");
+    //     String requestUri = (String) request.getAttribute("javax.servlet.error.request_uri");
+    //     Exception exception = (Exception) request.getAttribute("javax.servlet.error.exception");
 
-        // Add error details to the model
-        model.addAttribute("pageTitle", "Error");
-        model.addAttribute("status", status);
-        model.addAttribute("message", message);
-        model.addAttribute("exception", exception);
-        model.addAttribute("requestURI", request.getRequestURI());
+    //     StringWriter stringWriter = new StringWriter();
+    //     if (exception != null) {
+    //         exception.printStackTrace(new PrintWriter(stringWriter));
+    //     }
+    //     String stackTrace = stringWriter.toString();
 
-        return "error/error"; // Thymeleaf template name
-    }
+    //     // Add error details to the model
+    //     model.addAttribute("pageTitle", "Error");
+    //     model.addAttribute("statusCode", statusCode);
+    //     model.addAttribute("errorMessage", errorMessage);
+    //     model.addAttribute("exceptionType", exceptionType != null ? exceptionType.getName() : "Unknown");
+    //     model.addAttribute("exceptionMessage", exception != null ? exception.getMessage() : "N/A");
+    //     model.addAttribute("requestUri", requestUri);
+    //     model.addAttribute("stackTrace", stackTrace);
 
-    @GetMapping("/invalid")
-    public String invalidSession() {
-        return "error/session/invalid_session";
-    }
+    //     return "error/error"; // Thymeleaf template name
+    // }
 
-    @GetMapping("/expired")
-    public String sessionExpired() {
-        return "error/session/session_expired";
-    }
+    // @GetMapping("/invalid")
+    // public String invalidSession() {
+    //     return "error/session/invalid_session";
+    // }
+
+    // @GetMapping("/expired")
+    // public String sessionExpired() {
+    //     return "error/session/session_expired";
+    // }
 }

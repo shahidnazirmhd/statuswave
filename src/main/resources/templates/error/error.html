@@ -1,12 +1,45 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Error</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-spring5" lang="en">
+    <head th:replace="~{fragments/head :: head}"></head>
 <body>
-    <h1>An Error Occurred</h1>
-    <p>Status Code: <span th:text="${status}"></span></p>
-    <p>Error Message: <span th:text="${message}"></span></p>
-    <p>Exception: <span th:text="${exception.message}"></span></p>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card mt-5">
+                    <div class="card-header bg-danger text-white">
+                        <h1 class="card-title">An Error Occurred</h1>
+                    </div>
+                    <div class="card-body">
+                        <p class="lead" th:text="${errorMessage}">unexpected issue</p>
+
+                        <div class="mb-3">
+                            <strong>Status Code:</strong> 
+                            <span class="badge bg-danger" th:text="${statusCode}"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <strong>Request URI:</strong> 
+                            <span th:text="${requestUri}" class="text-muted"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <h4>Exception Type:</h4>
+                            <p th:text="${exceptionType}" class="text-info"></p>
+                        </div>
+
+                        <div class="mb-3">
+                            <h4>Exception Message:</h4>
+                            <p th:text="${exceptionMessage}" class="text-warning"></p>
+                        </div>
+
+                        <div class="mb-3">
+                            <h4>Stack Trace:</h4>
+                            <pre class="bg-light p-3 border" th:text="${stackTrace}"></pre> <!-- Display stack trace with light background -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

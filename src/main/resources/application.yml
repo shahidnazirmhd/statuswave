@@ -3,6 +3,10 @@ server:
   servlet:
     Session:
       timeout: 15m
+  error:
+    whitelabel:
+      enabled: false  
+    path: /error  
 
 spring:
     application:
