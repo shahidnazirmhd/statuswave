@@ -9,6 +9,8 @@ server:
     path: /error  
 
 spring:
+    thymeleaf:
+        cache: false
     application:
         name: moraceae
     datasource:

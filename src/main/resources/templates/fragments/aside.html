@@ -1,0 +1,53 @@
+<aside>
+    <div class="container-fluid">
+      <div class="row flex-nowrap">
+        <div class="bg-body-tertiary col-auto col-md-2 min-vh-100  d-flex flex-column justify-content-between">
+          <div class="navbar d-flex flex-column align-items-start">
+            <a class="navbar-brand" th:href="@{/}">
+              <span class="d-none d-sm-inline">moraceae</span>
+            </a>
+            <ul class="nav nav-pills flex-column mt-4">
+              <li class="nav-item py-2 py-sm-0">
+                <a href="#" class="nav-link active">
+                  <i class="fa-solid fa-gauge"></i><span class="ms-2 d-none d-sm-inline">Dashboard</span>
+                </a>
+              </li>
+              <li class="nav-item py-2 py-sm-0">
+                <a href="#" class="nav-link">
+                  <i class="fa-solid fa-vector-square"></i><span class="ms-2 d-none d-sm-inline">Link</span>
+                </a>
+              </li>
+              <li class="nav-item py-2 py-sm-0">
+                <a href="#" class="nav-link">
+                  <i class="fa-solid fa-road"></i><span class="ms-2 d-none d-sm-inline">Goto</span>
+                </a>
+              </li>
+              <li class="nav-item py-2 py-sm-0">
+                <a href="#" class="nav-link">
+                  <i class="fa-solid fa-asterisk"></i><span class="ms-2 d-none d-sm-inline">Reference</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="dropdown open p-3">
+            <button class="btn border-none btn-sm dropdown-toggle" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                <!-- Profile SVG Icon -->
+                <i class="fa fa-user"></i><span class="ms-2 d-none d-sm-inline" sec:authentication="principal.nameWithInitial">Name</span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="profileDropdown">
+                <li><a class="dropdown-item" href="#">View Profile</a></li>
+                <li><a class="dropdown-item" href="#">Settings</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                  <form th:action="@{/logout}" method="post" class="d-inline">
+                      <button type="submit" class="dropdown-item">
+                        <span class="me-1">Logout</span><i class="fa-solid fa-arrow-right-from-bracket"></i>
+                      </button>
+                  </form>
+              </li>
+            </ul>
+        </div>
+        </div>
+      </div>
+    </div>
+  </aside>

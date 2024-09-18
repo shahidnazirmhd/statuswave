@@ -1,7 +1,6 @@
 
 $primary:       #112D4E;
 $secondary:     #3F72AF;
-$body-bg:       #EEEEEE;
 
 @import '../../../../../node_modules/bootstrap/scss/bootstrap';
 
@@ -15,8 +14,4 @@ $body-bg:       #EEEEEE;
   .gradient-main {
     background: rgb(17,45,78);
     background: linear-gradient(140deg, rgba(17,45,78,1) 0%, rgba(63,114,175,1) 35%, rgba(219,226,239,1) 100%);
-}
-
-.ps-075 {
-  padding-left: 0.75rem;
 }
