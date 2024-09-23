@@ -5,7 +5,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build-css": "sass src/main/resources/static/scss/custom.scss | postcss --use autoprefixer -o src/main/resources/static/css/custom.css",
-    "watch-css": "sass --watch src/main/resources/static/scss/custom.scss | postcss --use autoprefixer -o src/main/resources/static/css/custom.css"
+    "watch-css": "sass --watch src/main/resources/static/scss/custom.scss | postcss --use autoprefixer -o src/main/resources/static/css/custom.css",
+    "get-htmx": "cp node_modules/htmx.org/dist/htmx.min.js src/main/resources/static/js/htmx.js"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +15,7 @@
   "dependencies": {
     "autoprefixer": "^10.4.20",
     "bootstrap": "^5.3.3",
+    "htmx.org": "^2.0.2",
     "postcss": "^8.4.45",
     "postcss-cli": "^11.0.0",
     "sass": "^1.78.0"

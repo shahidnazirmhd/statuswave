@@ -1,0 +1,35 @@
+<div class="container p-3 align-self-center bg-white rounded" th:fragment="login" id="login_div">
+    <div>
+        <!-- Default empty p tag -->
+        <p th:unless="${param.error} or ${param.logout}">&nbsp;</p>
+        
+        <!-- Error message -->
+        <p class="text-danger" th:if="${param.error}" th:text="${session.SPRING_SECURITY_LAST_EXCEPTION.message}"></p>
+        
+        <!-- Logout message -->
+        <p class="text-success" th:if="${param.logout}">You have been logged out.</p>
+    </div>                
+    <form th:action="@{/login}" method="post">
+        <div class="form-floating mb-3 mt-3">
+            <input type="text" class="form-control form-control-sm" name="username" id="user" placeholder="Enter your username" required/>
+            <label class="form-label" for="user">Username</label>
+        </div>
+        <div class="form-floating mb-3 mt-3">
+            <input type="password" class="form-control form-control-sm" name="password" id="pass" placeholder="Enter your password" required/>
+            <label class="form-label" for="pass">Password</label>
+        </div>
+        <div class="text-center">
+            <input type="submit" class="btn btn-primary" value="Login"/>
+        </div>
+    </form>
+    <div class="text-center mt-3">
+        <p>Don't have an account? 
+            <a href="" class="link-secondary" 
+            hx-get="/fragments/auth/register" 
+            hx-target="#login_div" 
+            hx-swap="outerHTML "
+            >
+            Register</a>
+        </p>
+    </div>
+</div>

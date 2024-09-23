@@ -24,8 +24,8 @@ public class StatuswaveApplication {
             return args -> {
                 var user =
         User.builder()
-            .firstname("Shahid")
-            .lastname("Z")
+            .firstname("Admin")
+            .lastname("Test")
             .email("admin")
             .password(passwordEncoder.encode("123"))
             .role(Role.ADMIN)

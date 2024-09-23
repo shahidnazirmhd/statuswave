@@ -1,0 +1,37 @@
+<div class="container p-3 align-self-center bg-white rounded" th:fragment="register" id="register_div">
+    <form th:action="@{/register}" method="post">
+        <div class="form-floating mb-3 mt-3">
+            <input type="text" class="form-control form-control-sm" name="orgName" id="orgName" placeholder="Enter your organization name" required/>
+            <label class="form-label" for="orgName">Organization Name</label>
+        </div>
+        <div class="form-floating mb-3 mt-3">
+            <input type="email" class="form-control form-control-sm" name="email" id="email" placeholder="Enter your email" required/>
+            <label class="form-label" for="email">Email</label>
+        </div>
+        <div class="form-floating mb-3 mt-3">
+            <input type="text" class="form-control form-control-sm" name="username" id="regUser" placeholder="Enter your username" required/>
+            <label class="form-label" for="regUser">Username</label>
+        </div>
+        <div class="form-floating mb-3 mt-3">
+            <input type="password" class="form-control form-control-sm" name="password" id="regPass" placeholder="Enter your password" required/>
+            <label class="form-label" for="regPass">Password</label>
+        </div>
+        <div class="form-floating mb-3 mt-3">
+            <input type="password" class="form-control form-control-sm" name="confirmPassword" id="confirmPass" placeholder="Confirm your password" required/>
+            <label class="form-label" for="confirmPass">Confirm Password</label>
+        </div>
+        <div class="text-center">
+            <input type="submit" class="btn btn-primary" value="Register"/>
+        </div>
+    </form>
+    <div class="text-center mt-3">
+        <p>Already have an account? 
+            <a href="" class="link-secondary" 
+            hx-get="/fragments/auth/login" 
+            hx-target="#register_div" 
+            hx-swap="outerHTML "
+            >
+                Login</a>
+        </p>
+    </div>
+</div>

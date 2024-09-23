@@ -12,9 +12,9 @@ spring:
     thymeleaf:
         cache: false
     application:
-        name: moraceae
+        name: statuswave
     datasource:
-        url: jdbc:postgresql://localhost:5432/moraceae
+        url: jdbc:postgresql://localhost:5432/statuswave
         username: sa
         password: passpgsql
         driver-class-name: org.postgresql.Driver
