@@ -1,4 +1,4 @@
-package in.snm.moraceae.user;
+package in.snm.statuswave.user;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -13,7 +13,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import in.snm.moraceae.role.Role;
+import in.snm.statuswave.role.Role;
 
 import java.security.Principal;
 import java.time.LocalDateTime;

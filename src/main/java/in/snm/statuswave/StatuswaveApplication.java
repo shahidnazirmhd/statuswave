@@ -1,4 +1,4 @@
-package in.snm.moraceae;
+package in.snm.statuswave;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -7,16 +7,16 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import in.snm.moraceae.role.Role;
-import in.snm.moraceae.user.User;
-import in.snm.moraceae.user.UserRepository;
+import in.snm.statuswave.role.Role;
+import in.snm.statuswave.user.User;
+import in.snm.statuswave.user.UserRepository;
 
 @SpringBootApplication
 @EnableJpaAuditing(auditorAwareRef = "auditorAware")
-public class MoraceaeApplication {
+public class StatuswaveApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MoraceaeApplication.class, args);
+		SpringApplication.run(StatuswaveApplication.class, args);
 	}
 
 	@Bean

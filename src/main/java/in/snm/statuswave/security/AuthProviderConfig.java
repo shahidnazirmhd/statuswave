@@ -1,4 +1,4 @@
-package in.snm.moraceae.security;
+package in.snm.statuswave.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

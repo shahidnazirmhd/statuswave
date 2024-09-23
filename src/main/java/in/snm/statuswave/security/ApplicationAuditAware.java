@@ -1,10 +1,11 @@
-package in.snm.moraceae.security;
+package in.snm.statuswave.security;
 
-import in.snm.moraceae.user.User;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+
+import in.snm.statuswave.user.User;
 
 import java.util.Optional;
 

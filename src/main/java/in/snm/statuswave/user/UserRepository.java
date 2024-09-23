@@ -1,4 +1,4 @@
-package in.snm.moraceae.user;
+package in.snm.statuswave.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

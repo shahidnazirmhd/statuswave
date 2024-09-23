@@ -1,4 +1,4 @@
-package in.snm.moraceae.role;
+package in.snm.statuswave.role;
 
 public enum Role {
     USER,

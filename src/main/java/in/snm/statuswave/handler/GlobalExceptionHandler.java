@@ -1,4 +1,4 @@
-package in.snm.moraceae.handler;
+package in.snm.statuswave.handler;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
