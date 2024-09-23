@@ -17,12 +17,12 @@ services:
 
   db:
     image: postgres:16.4
-    container_name: moraceae-db-master
+    container_name: statuswave-db-master
     restart: always          
     environment: 
       POSTGRES_USER: sa
       POSTGRES_PASSWORD: passpgsql
-      POSTGRES_DB: moraceae
+      POSTGRES_DB: statuswave
       #POSTGRES_HOST_AUTH_METHOD: "trust"
     volumes:                 
       - pg-data:/var/lib/postgresql/data
