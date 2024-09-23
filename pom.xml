@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>in.snm</groupId>
-	<artifactId>moraceae</artifactId>
+	<artifactId>statuswave</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>moraceae</name>
 	<description>Demo project for Spring Boot</description>
