@@ -1,24 +1,38 @@
 <div class="container p-3 align-self-center bg-white rounded" th:fragment="register" id="register_div">
-    <form th:action="@{/register}" method="post">
-        <div class="form-floating mb-3 mt-3">
-            <input type="text" class="form-control form-control-sm" name="orgName" id="orgName" placeholder="Enter your organization name" required/>
-            <label class="form-label" for="orgName">Organization Name</label>
+    <form th:action="@{/register}" th:object="${user}" method="post">
+        <div class="row mb-3 mt-3">
+            <div class="col-md-6">
+                <div class="form-floating">
+                    <input type="text" class="form-control form-control-sm" th:field="*{firstname}" id="firstname" placeholder="Your first name" required/>
+                    <label class="form-label" for="firstname">First Name</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-floating">
+                    <input type="text" class="form-control form-control-sm" th:field="*{lastname}" id="lastname" placeholder="Your last name" required/>
+                    <label class="form-label" for="lastname">Last Name</label>
+                </div>
+            </div>
         </div>
         <div class="form-floating mb-3 mt-3">
-            <input type="email" class="form-control form-control-sm" name="email" id="email" placeholder="Enter your email" required/>
+            <input type="text" class="form-control form-control-sm" th:field="*{companyName}" id="company" placeholder="Your organization name" required/>
+            <label class="form-label" for="company">Organization</label>
+        </div>
+        <div class="form-floating mb-3 mt-3">
+            <input type="text" class="form-control form-control-sm" th:field="*{profileURL}" id="profile-url" placeholder="Your profile URL" required/>
+            <label class="form-label" for="profile-url">Profile URL</label>
+        </div>
+        <div class="form-floating mb-3 mt-3">
+            <input type="email" class="form-control form-control-sm" th:field="*{email}" id="email" placeholder="Your email" required/>
             <label class="form-label" for="email">Email</label>
         </div>
         <div class="form-floating mb-3 mt-3">
-            <input type="text" class="form-control form-control-sm" name="username" id="regUser" placeholder="Enter your username" required/>
-            <label class="form-label" for="regUser">Username</label>
+            <input type="password" class="form-control form-control-sm" th:field="*{password}" id="password" placeholder="Your password" required/>
+            <label class="form-label" for="password">Password</label>
         </div>
         <div class="form-floating mb-3 mt-3">
-            <input type="password" class="form-control form-control-sm" name="password" id="regPass" placeholder="Enter your password" required/>
-            <label class="form-label" for="regPass">Password</label>
-        </div>
-        <div class="form-floating mb-3 mt-3">
-            <input type="password" class="form-control form-control-sm" name="confirmPassword" id="confirmPass" placeholder="Confirm your password" required/>
-            <label class="form-label" for="confirmPass">Confirm Password</label>
+            <input type="password" class="form-control form-control-sm" th:field="*{confirmPassword}" id="confirm-password" placeholder="Confirm your password" required/>
+            <label class="form-label" for="confirm-password">Confirm Password</label>
         </div>
         <div class="text-center">
             <input type="submit" class="btn btn-primary" value="Register"/>

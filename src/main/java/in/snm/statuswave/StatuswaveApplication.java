@@ -25,7 +25,9 @@ public class StatuswaveApplication {
                 var user =
         User.builder()
             .firstname("Admin")
-            .lastname("Test")
+            .lastname("")
+            .companyName("statuswave")
+            .profileURL("admin")
             .email("admin")
             .password(passwordEncoder.encode("123"))
             .role(Role.ADMIN)

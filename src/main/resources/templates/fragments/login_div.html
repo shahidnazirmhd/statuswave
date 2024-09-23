@@ -1,13 +1,15 @@
 <div class="container p-3 align-self-center bg-white rounded" th:fragment="login" id="login_div">
     <div>
         <!-- Default empty p tag -->
-        <p th:unless="${param.error} or ${param.logout}">&nbsp;</p>
+        <p th:unless="${param.error} or ${param.logout} or ${error} or ${registered}">&nbsp;</p>
         
         <!-- Error message -->
         <p class="text-danger" th:if="${param.error}" th:text="${session.SPRING_SECURITY_LAST_EXCEPTION.message}"></p>
         
         <!-- Logout message -->
         <p class="text-success" th:if="${param.logout}">You have been logged out.</p>
+        <p class="text-danger" th:if="${error}" th:text="${error}"></p>
+        <p class="text-success" th:if="${registered}" th:text="${registered}"></p>
     </div>                
     <form th:action="@{/login}" method="post">
         <div class="form-floating mb-3 mt-3">

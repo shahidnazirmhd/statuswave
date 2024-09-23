@@ -33,12 +33,18 @@ public class User implements UserDetails, Principal {
     private Long id;
     private String firstname;
     private String lastname;
-    @Column(unique = true)
+    private String companyName;
+    @Column(unique = true, nullable = false, updatable = false)
+    private String profileURL;
+    @Column(unique = true, nullable = false, updatable = false)
     private String email;
+    @Column(nullable = false)
     private String password;
+    @Transient
+    private String confirmPassword;
     @Enumerated(EnumType.STRING)
     private Role role;
-
+    
     @CreatedDate
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdDate;

@@ -23,7 +23,8 @@ public class SecurityConfig {
             "/i/**",
             // "/error",
             "/",
-            "fragments/auth/*"
+            "fragments/auth/*",
+            "/register"
         };
 
     @Bean
