@@ -46,10 +46,12 @@ public class HomeController {
     public String registerUser(HtmxRequest htmxRequest, @ModelAttribute("user") User user, Model model) {
         HtmxValidator.validateHtmxRequest(htmxRequest, "/login");
         if (userService.isEmailExist(user.getEmail())) {
+            System.out.println("ALREADY EXIST");
             model.addAttribute("registerError", "Email already registered - Please register again");
             return "fragments/register_div :: register";
         }
         if (!user.getPassword().equals(user.getConfirmPassword())) {
+            System.out.println("PASSWORD MISMATCH");
             model.addAttribute("registerError", "Passwords do not match - Please register again");
             return "fragments/register_div :: register";
         }
@@ -59,6 +61,7 @@ public class HomeController {
             System.out.println("SUCCESSFUL "+savedUser.getId()+ " " + savedUser.getUsername());
             return "fragments/login_div :: login";
         } else {
+            System.out.println("NOT REG");
             model.addAttribute("registerError", "Failed to create user. Please try again.");
             return "fragments/register_div :: register";
         }
