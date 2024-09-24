@@ -5,8 +5,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import in.snm.statuswave.common.HtmxValidator;
 import in.snm.statuswave.user.User;
 import in.snm.statuswave.user.UserService;
+import io.github.wimdeblauwe.htmx.spring.boot.mvc.HtmxRequest;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 
@@ -41,27 +43,24 @@ public class HomeController {
     }
 
     @PostMapping("/register")
-    public String registerUser(@ModelAttribute("user") User user, Model model) {
-
-        model.addAttribute("pageTitle", "Login");
+    public String registerUser(HtmxRequest htmxRequest, @ModelAttribute("user") User user, Model model) {
+        HtmxValidator.validateHtmxRequest(htmxRequest, "/login");
         if (userService.isEmailExist(user.getEmail())) {
-            model.addAttribute("error", "Email already registered - Please register again");
-            return "redirect:/login";
+            model.addAttribute("registerError", "Email already registered - Please register again");
+            return "fragments/register_div :: register";
         }
         if (!user.getPassword().equals(user.getConfirmPassword())) {
-            model.addAttribute("error", "Passwords do not match - Please register again");
-            return "redirect:/login";
+            model.addAttribute("registerError", "Passwords do not match - Please register again");
+            return "fragments/register_div :: register";
         }
-
         User savedUser = userService.saveUser(user);
-        System.out.println("REGISTER TRIGGERED");
         if (savedUser != null && savedUser.getId() != null) {
             model.addAttribute("registered", "Account registration successful");
-            System.out.println("SUCCESSFUL");
-            return "redirect:/login";
+            System.out.println("SUCCESSFUL "+savedUser.getId()+ " " + savedUser.getUsername());
+            return "fragments/login_div :: login";
         } else {
-            model.addAttribute("error", "Failed to create user. Please try again.");
-            return "redirect:/login";
+            model.addAttribute("registerError", "Failed to create user. Please try again.");
+            return "fragments/register_div :: register";
         }
     }
 
@@ -72,12 +71,14 @@ public class HomeController {
     }
 
     @GetMapping("/fragments/auth/login")
-    public String loginDiv() {
+    public String loginDiv(HtmxRequest htmxRequest) {
+        HtmxValidator.validateHtmxRequest(htmxRequest, "/login");
         return "fragments/login_div :: login";
     }
 
     @GetMapping("/fragments/auth/register")
-    public String registerDiv(Model model) {
+    public String registerDiv(HtmxRequest htmxRequest, Model model) {
+        HtmxValidator.validateHtmxRequest(htmxRequest, "/login");
         model.addAttribute("user", new User());
         return "fragments/register_div :: register";
     }
