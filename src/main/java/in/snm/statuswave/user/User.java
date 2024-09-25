@@ -35,7 +35,7 @@ public class User implements UserDetails, Principal {
     private String lastname;
     private String companyName;
     @Column(unique = true, nullable = false, updatable = false)
-    private String profileURL;
+    private String profileName;
     @Column(unique = true, nullable = false, updatable = false)
     private String email;
     @Column(nullable = false)
@@ -44,6 +44,11 @@ public class User implements UserDetails, Principal {
     private String confirmPassword;
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @Column(nullable = false)
+    private boolean accountLocked;
+    @Column(nullable = false)
+    private boolean enabled;
     
     @CreatedDate
     @Column(nullable = false, updatable = false)
@@ -69,7 +74,7 @@ public class User implements UserDetails, Principal {
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return !accountLocked;
     }
 
     @Override
@@ -79,7 +84,7 @@ public class User implements UserDetails, Principal {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return enabled;
     }
 
     @Override

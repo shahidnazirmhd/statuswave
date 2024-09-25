@@ -3,6 +3,7 @@ package in.snm.statuswave.user;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import in.snm.statuswave.model.UserVerifyRequest;
 import in.snm.statuswave.role.Role;
 import lombok.RequiredArgsConstructor;
 
@@ -20,15 +21,25 @@ public class UserService {
             .firstname(user.getFirstname())
             .lastname(user.getLastname())
             .companyName(user.getCompanyName())
-            .profileURL(user.getProfileURL())
+            .profileName(user.getProfileName())
             .email(user.getEmail())
             .password(passwordEncoder.encode(user.getPassword()))
             .role(user.getRole())
+            .accountLocked(false)
+            .enabled(false)
             .build();
         return userRepository.save(buildedUser);
     }
 
+    public UserVerifyRequest sendValidationEmail(User user) {
+        return new UserVerifyRequest(user.getUsername(), null);
+    }
+
     public boolean isEmailExist(String email) {
         return userRepository.findByEmail(email).isPresent();
+    }
+
+    public boolean isProfileNameExist(String profileName) {
+        return userRepository.findByProfileName(profileName).isPresent();
     }
 }

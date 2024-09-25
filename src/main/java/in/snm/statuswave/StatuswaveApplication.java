@@ -27,10 +27,12 @@ public class StatuswaveApplication {
             .firstname("Admin")
             .lastname("")
             .companyName("statuswave")
-            .profileURL("admin")
+            .profileName("admin")
             .email("admin")
             .password(passwordEncoder.encode("123"))
             .role(Role.ADMIN)
+            .accountLocked(false)
+            .enabled(true)
             .build();
     	userRepository.save(user);
             };

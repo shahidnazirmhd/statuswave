@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import in.snm.statuswave.common.HtmxValidator;
+import in.snm.statuswave.model.UserVerifyRequest;
 import in.snm.statuswave.user.User;
 import in.snm.statuswave.user.UserService;
 import io.github.wimdeblauwe.htmx.spring.boot.mvc.HtmxRequest;
@@ -45,26 +46,38 @@ public class HomeController {
     @PostMapping("/register")
     public String registerUser(HtmxRequest htmxRequest, @ModelAttribute("user") User user, Model model) {
         HtmxValidator.validateHtmxRequest(htmxRequest, "/login");
+        if (!user.getPassword().equals(user.getConfirmPassword())) {
+            model.addAttribute("registerError", "Passwords do not match - Please register again");
+            return "fragments/register_div :: register";
+        }
         if (userService.isEmailExist(user.getEmail())) {
-            System.out.println("ALREADY EXIST");
             model.addAttribute("registerError", "Email already registered - Please register again");
             return "fragments/register_div :: register";
         }
-        if (!user.getPassword().equals(user.getConfirmPassword())) {
-            System.out.println("PASSWORD MISMATCH");
-            model.addAttribute("registerError", "Passwords do not match - Please register again");
+        if (userService.isProfileNameExist(user.getProfileName())) {
+            model.addAttribute("registerError", "Profile name not available - Try different");
             return "fragments/register_div :: register";
         }
         User savedUser = userService.saveUser(user);
         if (savedUser != null && savedUser.getId() != null) {
-            model.addAttribute("registered", "Account registration successful");
-            System.out.println("SUCCESSFUL "+savedUser.getId()+ " " + savedUser.getUsername());
-            return "fragments/login_div :: login";
+            // model.addAttribute("registered", "Account registration successful");
+            UserVerifyRequest userVerifyRequest = userService.sendValidationEmail(savedUser);
+            model.addAttribute("userVerifyRequest", userVerifyRequest);
+            return "fragments/register_otp_div :: register_otp";
         } else {
-            System.out.println("NOT REG");
-            model.addAttribute("registerError", "Failed to create user. Please try again.");
+            model.addAttribute("registerError", "Registration failed. Please try again.");
             return "fragments/register_div :: register";
         }
+    }
+
+    @PostMapping("/verify")
+    public String verifyAccount(HtmxRequest htmxRequest, @ModelAttribute("userVerifyRequest") UserVerifyRequest userVerifyRequest, Model model) {
+        HtmxValidator.validateHtmxRequest(htmxRequest, "/login");
+
+        System.out.println("OTP VERIFICATION" + userVerifyRequest.username() + " | " + userVerifyRequest.otp());
+
+        model.addAttribute("registered", "Account registration successful");
+        return "fragments/login_div :: login";
     }
 
     @GetMapping("/land")
