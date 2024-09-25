@@ -6,6 +6,7 @@
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <script th:src="@{/js/bootstrap.bundle.min.js}" defer></script>
     <script th:src="@{/js/htmx.js}" defer></script>
+    <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             document.body.addEventListener('htmx:configRequest', function(event) {
@@ -13,7 +14,25 @@
                 const csrfHeader = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
                 event.detail.headers[csrfHeader] = csrfToken;
             });
+
+            // Function to render hCaptcha only when new content is swapped in
+            function renderHCaptcha() {
+                const hCaptchaContainer = document.getElementById('hcaptcha-container');
+                if (hCaptchaContainer) {
+                    hcaptcha.render('hcaptcha-container', {
+                        sitekey: 'ec9afee0-a574-4d9a-82d4-facc352850ea' // Replace with your actual site key
+                    });
+                }
+            }
+
+            // Event listener for HTMX afterSwap event
+            document.body.addEventListener('htmx:afterSwap', function(evt) {
+                renderHCaptcha(); // Render hCaptcha after HTMX swaps content
+            });
+
         });
+
+        
     </script>
     <link th:href="@{/css/custom.css}" rel="stylesheet" />
     <link th:href="@{/i/fontawesome/css/all.min.css}" rel="stylesheet" />

@@ -3,6 +3,7 @@ package in.snm.statuswave.home;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import in.snm.statuswave.common.HtmxValidator;
@@ -44,8 +45,14 @@ public class HomeController {
     }
 
     @PostMapping("/register")
-    public String registerUser(HtmxRequest htmxRequest, @ModelAttribute("user") User user, Model model) {
+    public String registerUser(HtmxRequest htmxRequest, @ModelAttribute("user") User user, Model model, @RequestParam("h-captcha-response") String captchaResponse) {
         HtmxValidator.validateHtmxRequest(htmxRequest, "/login");
+
+        System.out.println(captchaResponse);
+        if (StringUtils.hasText(captchaResponse)) {
+            System.out.println("##########################################");
+        }
+
         if (!user.getPassword().equals(user.getConfirmPassword())) {
             model.addAttribute("registerError", "Passwords do not match - Please register again");
             return "fragments/register_div :: register";
