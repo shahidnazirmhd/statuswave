@@ -10,6 +10,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+
+import in.snm.statuswave.security.custom.CustomAuthenticatioFailureHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -25,7 +28,8 @@ public class SecurityConfig {
             "/",
             "fragments/auth/*",
             "/register",
-            "/verify"
+            "/verify",
+            "/login"
         };
 
     @Bean
@@ -39,6 +43,7 @@ public class SecurityConfig {
 			.formLogin((form) -> form
 				.loginPage("/login")
                 .defaultSuccessUrl("/land", true)
+                .failureHandler(customAuthenticationFailureHandler())
 				.permitAll()
             )
     .sessionManagement((sessions) -> sessions
@@ -57,4 +62,8 @@ public class SecurityConfig {
         return httpSecurity.build();
     }
 
+    @Bean
+    public AuthenticationFailureHandler customAuthenticationFailureHandler() {
+        return new CustomAuthenticatioFailureHandler();
+    }
 }

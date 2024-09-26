@@ -1,5 +1,6 @@
 package in.snm.statuswave.security;
 
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.AuditorAware;
@@ -12,6 +13,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
+import org.springframework.web.client.RestTemplate;
+
 import lombok.RequiredArgsConstructor;
 
 @Configuration
@@ -51,5 +54,10 @@ public class AuthProviderConfig {
     @Bean
     public AuditorAware<Long> auditorAware() {
         return new ApplicationAuditAware();
+    }
+
+    @Bean
+    public RestTemplate restTemplate(RestTemplateBuilder builder) {
+        return builder.build();
     }
 } 

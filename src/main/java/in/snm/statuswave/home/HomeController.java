@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import in.snm.statuswave.common.CaptchaValidator;
 import in.snm.statuswave.common.HtmxValidator;
 import in.snm.statuswave.model.UserVerifyRequest;
 import in.snm.statuswave.user.User;
@@ -19,6 +20,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class HomeController {
     private final UserService userService;
+    private final CaptchaValidator captchaValidator;
 
     @GetMapping("/")
     public String homePage(HttpServletRequest request, Model model) {
@@ -38,6 +40,17 @@ public class HomeController {
         return "community"; 
     }
 
+
+    // @GetMapping("/login")
+    // public String loginPage(@RequestParam(value = "error", required = false) String error, Model model) {
+    //     model.addAttribute("pageTitle", "Login");
+    //     if ("true".equals(error)) {
+    //         model.addAttribute("errorMessage", "Invalid username or password!");
+    //     }
+    //     return "login"; // Ensure this corresponds to your view (e.g., login.html or login.jsp)
+    // }
+
+
     @GetMapping("/login")
     public String loginPage(HttpServletRequest request, Model model) {
         model.addAttribute("pageTitle", "Login");
@@ -48,9 +61,14 @@ public class HomeController {
     public String registerUser(HtmxRequest htmxRequest, @ModelAttribute("user") User user, Model model, @RequestParam("h-captcha-response") String captchaResponse) {
         HtmxValidator.validateHtmxRequest(htmxRequest, "/login");
 
-        System.out.println(captchaResponse);
-        if (StringUtils.hasText(captchaResponse)) {
-            System.out.println("##########################################");
+        if (!StringUtils.hasText(captchaResponse)) {
+            model.addAttribute("registerError", "Please complete the captcha to proceed");
+            return "fragments/register_div :: register";
+        }
+
+        if (!captchaValidator.validateCaptcha(captchaResponse)) {
+            model.addAttribute("registerError", "Captcha verification failed. Please try again");
+            return "fragments/register_div :: register";
         }
 
         if (!user.getPassword().equals(user.getConfirmPassword())) {
