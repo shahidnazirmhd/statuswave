@@ -5,7 +5,10 @@
         
         <!-- Logout message -->
         <p class="text-success" th:if="${param.logout}">You have been logged out.</p>
-        <p class="text-danger" th:if="${errorMessage}" th:text="${errorMessage}"></p>
+        <p class="text-danger" th:if="${errorMessage}">
+            <span th:text="${errorMessage}"></span>
+            <a href="#" th:if="${needToverify}">verify</a>
+        </p>
         <p class="text-success" th:if="${registered}" th:text="${registered}"></p>
     </div>                
     <form th:action="@{/login}" method="post">

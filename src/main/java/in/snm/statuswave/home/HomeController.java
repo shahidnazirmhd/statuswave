@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import in.snm.statuswave.common.CaptchaValidator;
 import in.snm.statuswave.common.HtmxValidator;
+import in.snm.statuswave.model.AuthFailureResponse;
 import in.snm.statuswave.model.UserVerifyRequest;
 import in.snm.statuswave.user.User;
 import in.snm.statuswave.user.UserService;
@@ -43,11 +44,14 @@ public class HomeController {
 
     @GetMapping("/login")
     public String loginPage(HttpServletRequest request, Model model) {
-        String errorMessage = (String) request.getSession().getAttribute("errorMessage");
+        AuthFailureResponse authFailure = (AuthFailureResponse) request.getSession().getAttribute("authFailure");
         model.addAttribute("pageTitle", "Login");
-    if (errorMessage != null) {
-        model.addAttribute("errorMessage", errorMessage);
-        request.getSession().removeAttribute("errorMessage");
+    if (authFailure != null) {
+        model.addAttribute("errorMessage", authFailure.message());
+        if(authFailure.action() != null && authFailure.action().equals("verify")) {
+            model.addAttribute("needToverify", true);
+        }
+        request.getSession().removeAttribute("authFailure");
     }
     return "login";
     }
