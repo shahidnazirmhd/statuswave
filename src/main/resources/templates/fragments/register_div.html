@@ -6,13 +6,13 @@
     </div>  
     <form th:object="${user}" hx-post="/register" hx-target="#register_div" hx-swap="outerHTML" >
         <div class="row mb-3 mt-3">
-            <div class="col-md-6">
+            <div class="col-6">
                 <div class="form-floating">
                     <input type="text" class="form-control form-control-sm" th:field="*{firstname}" id="firstname" placeholder="Your first name" required/>
                     <label class="form-label" for="firstname">First Name</label>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-6">
                 <div class="form-floating">
                     <input type="text" class="form-control form-control-sm" th:field="*{lastname}" id="lastname" placeholder="Your last name" required/>
                     <label class="form-label" for="lastname">Last Name</label>
@@ -39,7 +39,10 @@
             <input type="password" class="form-control form-control-sm" th:field="*{confirmPassword}" id="confirm-password" placeholder="Confirm your password" required/>
             <label class="form-label" for="confirm-password">Confirm Password</label>
         </div>
-        <div id="hcaptcha-container" class="h-captcha" data-sitekey="ec9afee0-a574-4d9a-82d4-facc352850ea"></div>
+        <!-- <div id="hcaptcha-container" class="h-captcha" data-sitekey="ec9afee0-a574-4d9a-82d4-facc352850ea"></div> -->
+        <div class="d-flex justify-content-center mb-3">
+            <div id="hcaptcha-container" class="h-captcha d-inline-block" data-sitekey="ec9afee0-a574-4d9a-82d4-facc352850ea" ></div>
+        </div>
         <div class="text-center">
             <input type="submit" class="btn btn-primary" value="Register"/>
         </div>

@@ -15,19 +15,16 @@
                 event.detail.headers[csrfHeader] = csrfToken;
             });
 
-            // Function to render hCaptcha only when new content is swapped in
             function renderHCaptcha() {
                 const hCaptchaContainer = document.getElementById('hcaptcha-container');
                 if (hCaptchaContainer) {
                     hcaptcha.render('hcaptcha-container', {
-                        sitekey: 'ec9afee0-a574-4d9a-82d4-facc352850ea' // Replace with your actual site key
+                        sitekey: 'ec9afee0-a574-4d9a-82d4-facc352850ea'
                     });
                 }
             }
-
-            // Event listener for HTMX afterSwap event
             document.body.addEventListener('htmx:afterSwap', function(evt) {
-                renderHCaptcha(); // Render hCaptcha after HTMX swaps content
+                renderHCaptcha();
             });
 
         });
