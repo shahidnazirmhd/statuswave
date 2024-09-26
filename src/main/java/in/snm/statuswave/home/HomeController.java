@@ -41,19 +41,14 @@ public class HomeController {
     }
 
 
-    // @GetMapping("/login")
-    // public String loginPage(@RequestParam(value = "error", required = false) String error, Model model) {
-    //     model.addAttribute("pageTitle", "Login");
-    //     if ("true".equals(error)) {
-    //         model.addAttribute("errorMessage", "Invalid username or password!");
-    //     }
-    //     return "login"; // Ensure this corresponds to your view (e.g., login.html or login.jsp)
-    // }
-
-
     @GetMapping("/login")
     public String loginPage(HttpServletRequest request, Model model) {
+        String errorMessage = (String) request.getSession().getAttribute("errorMessage");
         model.addAttribute("pageTitle", "Login");
+    if (errorMessage != null) {
+        model.addAttribute("errorMessage", errorMessage);
+        request.getSession().removeAttribute("errorMessage");
+    }
     return "login";
     }
 

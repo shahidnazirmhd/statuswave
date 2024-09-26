@@ -2,6 +2,7 @@ package in.snm.statuswave.security.custom;
 
 import java.io.IOException;
 
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
@@ -17,7 +18,12 @@ public class CustomAuthenticatioFailureHandler implements AuthenticationFailureH
 
                 System.out.println("Authentication failed: " + exception.getMessage());
 
-                response.sendRedirect("/login?error");
+                if (exception instanceof DisabledException) {
+                    System.out.println("USER DISABLED EXCEPTION");
+                }
+    
+                request.getSession().setAttribute("errorMessage", exception.getMessage());
+                response.sendRedirect("/login");
     }
     
 }
