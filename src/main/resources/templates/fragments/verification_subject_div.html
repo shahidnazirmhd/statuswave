@@ -1,0 +1,19 @@
+<div class="container p-3 align-self-center bg-white rounded" th:fragment="verification_subject" id="verification_subject_div">
+    <div>
+        <!-- Default empty p tag -->
+        <p th:unless="${errorMessage}">&nbsp;</p>
+        <p class="text-danger" th:if="${errorMessage}" th:text="${errorMessage}"></p>
+    </div>
+    <div>
+        <p>Enter your email to get OTP</p>
+    </div>                
+    <form hx-post="/verify/subject" hx-target="#verification_subject_div" hx-swap="outerHTML">
+        <div class="form-floating mb-3 mt-3">
+            <input type="email" class="form-control form-control-sm" name="email" id="email" placeholder="Enter your Email" required/>
+            <label class="form-label" for="email">Email</label>
+        </div>
+        <div class="text-center">
+            <input type="submit" class="btn btn-primary" value="Send"/>
+        </div>
+    </form>
+</div>

@@ -7,7 +7,7 @@
         <p class="text-success" th:if="${param.logout}">You have been logged out.</p>
         <p class="text-danger" th:if="${errorMessage}">
             <span th:text="${errorMessage}"></span>
-            <a href="#" th:if="${needToverify}">verify</a>
+            <a href="" class="link-secondary" hx-get="/fragments/auth/verification-subject" hx-target="#login_div" hx-swap="outerHTML " th:if="${needToverify}">verify</a>
         </p>
         <p class="text-success" th:if="${registered}" th:text="${registered}"></p>
     </div>                

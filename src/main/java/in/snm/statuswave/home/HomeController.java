@@ -82,7 +82,7 @@ public class HomeController {
             model.addAttribute("registerError", "Profile name not available - Try different");
             return "fragments/register_div :: register";
         }
-        User savedUser = userService.saveUser(user);
+        User savedUser = userService.registerUser(user);
         if (savedUser != null && savedUser.getId() != null) {
             // model.addAttribute("registered", "Account registration successful");
             UserVerifyRequest userVerifyRequest = userService.sendValidationEmail(savedUser);
@@ -94,20 +94,43 @@ public class HomeController {
         }
     }
 
-    @PostMapping("/verify")
+    @PostMapping("/verify/otp")
     public String verifyAccount(HtmxRequest htmxRequest, @ModelAttribute("userVerifyRequest") UserVerifyRequest userVerifyRequest, Model model) {
         HtmxValidator.validateHtmxRequest(htmxRequest, "/login");
-
-        System.out.println("OTP VERIFICATION" + userVerifyRequest.username() + " | " + userVerifyRequest.otp());
-
-        model.addAttribute("registered", "Account registration successful");
-        return "fragments/login_div :: login";
+        if(userVerifyRequest.otp().equals("1234")) {
+            User user = userService.findByEmail(userVerifyRequest.username()).orElseThrow();
+            user.setEnabled(true);
+            userService.save(user);
+            model.addAttribute("registered", "You are verified. Please login");
+            return "fragments/login_div :: login";
+        } else {
+            model.addAttribute("errorMessage", "Incorrect OTP");
+            model.addAttribute("userVerifyRequest", UserVerifyRequest.builder().username(userVerifyRequest.username()).build());
+            return "fragments/register_otp_div :: register_otp";
+        }
     }
 
-    @GetMapping("/land")
-    public String landPage(HttpServletRequest request, Model model){
-        model.addAttribute("pageTitle", "Land");
-    return "land";
+    @PostMapping("/verify/subject")
+    public String verifySubject(HtmxRequest htmxRequest, @RequestParam("email") String email, Model model) {
+        HtmxValidator.validateHtmxRequest(htmxRequest, "/login");
+        User verificationSubject = userService.findByEmail(email).orElse(null);
+        if (verificationSubject == null) {
+            model.addAttribute("errorMessage", "Please enter correct registered email");
+            return "fragments/verification_subject_div :: verification_subject";
+        } else if(verificationSubject.isEnabled()) {
+            model.addAttribute("registered", "You are verified. Please login");
+            return "fragments/login_div :: login";
+        } else {
+            UserVerifyRequest userVerifyRequest = userService.sendValidationEmail(verificationSubject);
+            model.addAttribute("userVerifyRequest", userVerifyRequest);
+            return "fragments/register_otp_div :: register_otp";
+        }
+    }
+
+    @GetMapping("/fragments/auth/verification-subject")
+    public String verificationSubjectDiv(HtmxRequest htmxRequest) {
+        HtmxValidator.validateHtmxRequest(htmxRequest, "/login");
+        return "fragments/verification_subject_div :: verification_subject";
     }
 
     @GetMapping("/fragments/auth/login")
@@ -121,6 +144,12 @@ public class HomeController {
         HtmxValidator.validateHtmxRequest(htmxRequest, "/login");
         model.addAttribute("user", new User());
         return "fragments/register_div :: register";
+    }
+
+    @GetMapping("/land")
+    public String landPage(HttpServletRequest request, Model model){
+        model.addAttribute("pageTitle", "Land");
+        return "land";
     }
 
     @ModelAttribute("requestURI")

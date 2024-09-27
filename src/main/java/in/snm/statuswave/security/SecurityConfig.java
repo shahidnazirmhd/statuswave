@@ -28,7 +28,7 @@ public class SecurityConfig {
             "/",
             "fragments/auth/*",
             "/register",
-            "/verify"
+            "/verify/*"
         };
 
     @Bean

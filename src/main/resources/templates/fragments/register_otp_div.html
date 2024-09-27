@@ -1,13 +1,13 @@
 <div class="container p-3 align-self-center bg-white rounded" th:fragment="register_otp" id="register_otp_div">
     <div>
         <!-- Default empty p tag -->
-        <p th:unless="${otpError}">&nbsp;</p>
-        <p class="text-danger" th:if="${otpError}" th:text="${otpError}"></p>
+        <p th:unless="${errorMessage}">&nbsp;</p>
+        <p class="text-danger" th:if="${errorMessage}" th:text="${errorMessage}"></p>
     </div>
     <div>
         <p>Check your email</p>
     </div>                
-    <form th:object="${userVerifyRequest}" hx-post="/verify" hx-target="#register_otp_div" hx-swap="outerHTML">
+    <form th:object="${userVerifyRequest}" hx-post="/verify/otp" hx-target="#register_otp_div" hx-swap="outerHTML">
         <input type="hidden" th:field="*{username}" />
         <div class="form-floating mb-3 mt-3">
             <input type="number" class="form-control form-control-sm" th:field="*{otp}" id="otp" placeholder="Enter your OTP" required/>
