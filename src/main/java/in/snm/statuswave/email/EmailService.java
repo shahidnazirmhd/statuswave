@@ -3,6 +3,8 @@ package in.snm.statuswave.email;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
@@ -17,6 +19,9 @@ import java.util.Map;
 @Service
 @RequiredArgsConstructor
 public class EmailService {
+
+    @Value("${spring.mail.from-address}")
+    private String fromAddress;
 
     private final JavaMailSender mailSender;
     private final SpringTemplateEngine springTemplateEngine;
@@ -52,7 +57,7 @@ public class EmailService {
                 MimeMessageHelper.MULTIPART_MODE_MIXED,
                 StandardCharsets.UTF_8.name()
         );
-        mimeHelper.setFrom("shahidnazirmhd@gmail.com");
+        mimeHelper.setFrom(fromAddress);
         mimeHelper.setTo(to);
         mimeHelper.setSubject(subject);
         mimeHelper.setText(template, true);

@@ -6,7 +6,7 @@ server:
     key-store-type: PKCS12
     key-alias: mycert
   servlet:
-    Session:
+    session:
       timeout: 15m
   error:
     whitelabel:
@@ -14,24 +14,40 @@ server:
     path: /error  
 
 spring:
-    thymeleaf:
-        cache: false
-    application:
-        name: statuswave
-    datasource:
-        url: jdbc:postgresql://localhost:5432/statuswave
-        username: sa
-        password: passpgsql
-        driver-class-name: org.postgresql.Driver
-    jpa:
-        hibernate:
-            ddl-auto: create-drop
-        show-sql: false
-        properties:
-            hibernate:
-                format_sql: true
-        database: postgresql
-        database-platform: org.hibernate.dialect.PostgreSQLDialect
+  thymeleaf:
+    cache: false
+  application:
+    name: statuswave
+  datasource:
+    url: jdbc:postgresql://localhost:5432/statuswave
+    username: sa
+    password: passpgsql
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  mail:
+    host: ${EMAIL_HOST_NAME}
+    port: 465
+    username: ${EMAIL_USER_NAME}
+    password: ${EMAIL_PASSWORD}
+    from-address: ${EMAIL_FROM_ADDRESS}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          ssl:
+            enable: true
+            trust: "*"
+        starttls:
+          enable: true
+    protocol: smtp      
 hCaptcha:
   secret:
-    key: ${H_CAPTCHA_SECRET}       
+    key: ${H_CAPTCHA_SECRET}
