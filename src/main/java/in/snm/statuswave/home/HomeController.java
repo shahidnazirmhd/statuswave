@@ -10,9 +10,11 @@ import in.snm.statuswave.common.CaptchaValidator;
 import in.snm.statuswave.common.HtmxValidator;
 import in.snm.statuswave.model.AuthFailureResponse;
 import in.snm.statuswave.model.UserVerifyRequest;
+import in.snm.statuswave.user.AuthService;
 import in.snm.statuswave.user.User;
 import in.snm.statuswave.user.UserService;
 import io.github.wimdeblauwe.htmx.spring.boot.mvc.HtmxRequest;
+import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 
@@ -21,6 +23,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class HomeController {
     private final UserService userService;
+    private final AuthService authService; 
     private final CaptchaValidator captchaValidator;
 
     @GetMapping("/")
@@ -57,7 +60,7 @@ public class HomeController {
     }
 
     @PostMapping("/register")
-    public String registerUser(HtmxRequest htmxRequest, @ModelAttribute("user") User user, Model model, @RequestParam("h-captcha-response") String captchaResponse) {
+    public String registerUser(HtmxRequest htmxRequest, @ModelAttribute("user") User user, Model model, @RequestParam("h-captcha-response") String captchaResponse)  throws MessagingException {
         HtmxValidator.validateHtmxRequest(htmxRequest, "/login");
 
         if (!StringUtils.hasText(captchaResponse)) {
@@ -82,10 +85,10 @@ public class HomeController {
             model.addAttribute("registerError", "Profile name not available - Try different");
             return "fragments/register_div :: register";
         }
-        User savedUser = userService.registerUser(user);
+        User savedUser = authService.registerUser(user);
         if (savedUser != null && savedUser.getId() != null) {
             // model.addAttribute("registered", "Account registration successful");
-            UserVerifyRequest userVerifyRequest = userService.sendValidationEmail(savedUser);
+            UserVerifyRequest userVerifyRequest = authService.sendValidationEmail(savedUser);
             model.addAttribute("userVerifyRequest", userVerifyRequest);
             return "fragments/register_otp_div :: register_otp";
         } else {
@@ -95,23 +98,23 @@ public class HomeController {
     }
 
     @PostMapping("/verify/otp")
-    public String verifyAccount(HtmxRequest htmxRequest, @ModelAttribute("userVerifyRequest") UserVerifyRequest userVerifyRequest, Model model) {
+    public String verifyAccount(HtmxRequest htmxRequest, @ModelAttribute("userVerifyRequest") UserVerifyRequest userVerifyRequest, Model model) throws MessagingException {
         HtmxValidator.validateHtmxRequest(htmxRequest, "/login");
-        if(userVerifyRequest.otp().equals("1234")) {
-            User user = userService.findByEmail(userVerifyRequest.username()).orElseThrow();
-            user.setEnabled(true);
-            userService.save(user);
+        String username = userVerifyRequest.username();
+        String otp = userVerifyRequest.otp();
+        String message = authService.activateAccount(otp, username);
+        if(message.equals("OK")) {
             model.addAttribute("registered", "You are verified. Please login");
             return "fragments/login_div :: login";
         } else {
-            model.addAttribute("errorMessage", "Incorrect OTP");
-            model.addAttribute("userVerifyRequest", UserVerifyRequest.builder().username(userVerifyRequest.username()).build());
+            model.addAttribute("errorMessage", message);
+            model.addAttribute("userVerifyRequest", UserVerifyRequest.builder().username(username).build());
             return "fragments/register_otp_div :: register_otp";
         }
     }
 
     @PostMapping("/verify/subject")
-    public String verifySubject(HtmxRequest htmxRequest, @RequestParam("email") String email, Model model) {
+    public String verifySubject(HtmxRequest htmxRequest, @RequestParam("email") String email, Model model) throws MessagingException {
         HtmxValidator.validateHtmxRequest(htmxRequest, "/login");
         User verificationSubject = userService.findByEmail(email).orElse(null);
         if (verificationSubject == null) {
@@ -121,7 +124,7 @@ public class HomeController {
             model.addAttribute("registered", "You are verified. Please login");
             return "fragments/login_div :: login";
         } else {
-            UserVerifyRequest userVerifyRequest = userService.sendValidationEmail(verificationSubject);
+            UserVerifyRequest userVerifyRequest = authService.sendValidationEmail(verificationSubject);
             model.addAttribute("userVerifyRequest", userVerifyRequest);
             return "fragments/register_otp_div :: register_otp";
         }
@@ -146,11 +149,6 @@ public class HomeController {
         return "fragments/register_div :: register";
     }
 
-    @GetMapping("/land")
-    public String landPage(HttpServletRequest request, Model model){
-        model.addAttribute("pageTitle", "Land");
-        return "land";
-    }
 
     @ModelAttribute("requestURI")
     public String requestURI(HttpServletRequest request) {
