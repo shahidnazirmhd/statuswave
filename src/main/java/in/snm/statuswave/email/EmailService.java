@@ -3,6 +3,7 @@ package in.snm.statuswave.email;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -17,6 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class EmailService {
 
@@ -39,8 +41,10 @@ public class EmailService {
         if(emailTemplate == null) {
             templateName = "confirm-email";
         } else {
-            templateName = emailTemplate.name();
+            templateName = emailTemplate.getName();
         }
+
+        System.out.println(templateName);
 
         Map<String, Object> properties = new HashMap<>();
         properties.put("username", username);

@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import in.snm.statuswave.role.Role;
@@ -13,6 +14,7 @@ import in.snm.statuswave.user.UserRepository;
 
 @SpringBootApplication
 @EnableJpaAuditing(auditorAwareRef = "auditorAware")
+@EnableAsync
 public class StatuswaveApplication {
 
 	public static void main(String[] args) {

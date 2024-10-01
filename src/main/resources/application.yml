@@ -45,8 +45,8 @@ spring:
           ssl:
             enable: true
             trust: "*"
-        starttls:
-          enable: true
+          starttls:
+            enable: true
     protocol: smtp      
 hCaptcha:
   secret:
