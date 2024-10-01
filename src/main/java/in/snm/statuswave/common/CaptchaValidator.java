@@ -20,7 +20,6 @@ public class CaptchaValidator {
     public boolean validateCaptcha(String captchaResponse) {
         String hCaptchaUrl = "https://hcaptcha.com/siteverify";
 
-        // Prepare the form parameters
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.add("secret", hCaptchaSecretKey);
         params.add("response", captchaResponse);
@@ -28,12 +27,7 @@ public class CaptchaValidator {
         // Send the POST request to hCaptcha
         ResponseEntity<String> response = restTemplate.postForEntity(hCaptchaUrl, params, String.class);
 
-        // Log response for debugging
-        System.out.println("hCaptcha Response Status: " + response.getStatusCode());
-        System.out.println("hCaptcha Response Body: " + response.getBody());
         boolean result = response.getBody() != null && response.getBody().contains("\"success\":true");
-        System.out.println("RESULT: " + result);
-        // Check if the response contains the success flag
         return result;
     }
 }
