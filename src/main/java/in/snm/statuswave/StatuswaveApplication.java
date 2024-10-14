@@ -24,7 +24,7 @@ public class StatuswaveApplication {
 	@Bean
 	public CommandLineRunner runner(UserRepository userRepository, PasswordEncoder passwordEncoder) {
             return args -> {
-                var user =
+                var adminUser =
         User.builder()
             .firstname("Admin")
             .lastname("")
@@ -36,7 +36,21 @@ public class StatuswaveApplication {
             .accountLocked(false)
             .enabled(true)
             .build();
-    	userRepository.save(user);
+    	userRepository.save(adminUser);
+
+            var user =
+            User.builder()
+                .firstname("Test")
+                .lastname("Demo")
+                .companyName("statuswave")
+                .profileName("test")
+                .email("test")
+                .password(passwordEncoder.encode("123"))
+                .role(Role.USER)
+                .accountLocked(false)
+                .enabled(true)
+                .build();
+                userRepository.save(user);
             };
 	}
 
