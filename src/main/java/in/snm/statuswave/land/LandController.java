@@ -34,6 +34,7 @@ public class LandController {
         return "land";
     }
 
+    
     @ModelAttribute("requestURI")
     public String requestURI(HttpServletRequest request) {
         return request.getRequestURI(); 
