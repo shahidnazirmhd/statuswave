@@ -41,7 +41,7 @@ public class SecurityConfig {
 			)
 			.formLogin((form) -> form
 				.loginPage("/login")
-                .defaultSuccessUrl("/land", true)
+                .defaultSuccessUrl("/app/dashboard", true)
                 .failureHandler(customAuthenticationFailureHandler())
 				.permitAll()
             )

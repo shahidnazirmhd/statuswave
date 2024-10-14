@@ -5,23 +5,23 @@
     </a>
     <ul class="nav nav-pills flex-column mt-4">
       <li class="nav-item py-2 py-sm-0">
-        <a href="#" class="nav-link active">
+        <a th:href="@{/app/dashboard}" class="nav-link" th:classappend="${requestURI == '/app/dashboard' ? 'active' : ''}">
           <i class="fa-solid fa-gauge"></i><span class="ms-2 d-none d-sm-inline">Dashboard</span>
         </a>
       </li>
       <li class="nav-item py-2 py-sm-0">
-        <a href="#" class="nav-link">
-          <i class="fa-solid fa-vector-square"></i><span class="ms-2 d-none d-sm-inline">Link</span>
+        <a th:href="@{/app/create}" class="nav-link" th:classappend="${requestURI == '/app/create' ? 'active' : ''}">
+          <i class="fa-solid fa-vector-square"></i><span class="ms-2 d-none d-sm-inline">Create</span>
         </a>
       </li>
       <li class="nav-item py-2 py-sm-0">
-        <a href="#" class="nav-link">
-          <i class="fa-solid fa-road"></i><span class="ms-2 d-none d-sm-inline">Goto</span>
+        <a th:href="@{/app/active}" class="nav-link" th:classappend="${requestURI == '/app/active' ? 'active' : ''}">
+          <i class="fa-solid fa-road"></i><span class="ms-2 d-none d-sm-inline">Active</span>
         </a>
       </li>
       <li class="nav-item py-2 py-sm-0">
-        <a href="#" class="nav-link">
-          <i class="fa-solid fa-asterisk"></i><span class="ms-2 d-none d-sm-inline">Reference</span>
+        <a th:href="@{/app/history}" class="nav-link" th:classappend="${requestURI == '/app/history' ? 'active' : ''}">
+          <i class="fa-solid fa-asterisk"></i><span class="ms-2 d-none d-sm-inline">History</span>
         </a>
       </li>
     </ul>
