@@ -1,0 +1,39 @@
+<div th:fragment="create_div">
+    <form action="#" method="post">
+        <h5 class="pb-2 border-bottom">Subject</h5>
+        <div class="row mb-3 mt-3">
+            <div class="col-6">
+                <div class="form-floating">
+                    <input type="text" class="form-control form-control-sm" name="*{firstname}" id="firstname" placeholder="Your first name" required/>
+                    <label class="form-label" for="firstname">First Name</label>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-floating">
+                    <input type="text" class="form-control form-control-sm" name="*{lastname}" id="lastname" placeholder="Your last name" required/>
+                    <label class="form-label" for="lastname">Last Name</label>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-3 mt-3">
+            <div class="col-4">
+                <div class="form-floating">
+                    <input type="tel" class="form-control form-control-sm" name="*{firstname}" id="subject-mobile" placeholder="Subject Mobile" required/>
+                    <label class="form-label" for="subject-mobile">Mobile</label>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="form-floating">
+                    <input type="email" class="form-control form-control-sm" name="*{lastname}" id="subject-email" placeholder="Subject Email" required/>
+                    <label class="form-label" for="subject-email">Email</label>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="form-floating">
+                    <input type="text" class="form-control form-control-sm" name="*{lastname}" id="subject-address" placeholder="Subject Address" required/>
+                    <label class="form-label" for="subject-address">Address</label>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

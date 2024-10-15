@@ -6,8 +6,8 @@
         <div class="row">
           <aside th:replace="~{fragments/aside :: aside}"></aside>
           <!-- Main content -->
-          <div class="col px-4">
-            <h1>TEST</h1>
+          <div class="col p-4">
+             <div th:replace="('fragments/' + ${fragmentName}) :: (${fragmentName})"></div>
           </div>
         </div>
       </div>
