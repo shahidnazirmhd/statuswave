@@ -4,13 +4,13 @@
         <div class="row mb-3 mt-3">
             <div class="col-6">
                 <div class="form-floating">
-                    <input type="text" class="form-control form-control-sm" name="*{firstname}" id="firstname" placeholder="Your first name" required/>
+                    <input type="text" class="form-control form-control-sm" name="*{firswertname}" id="firstname" placeholder="Your first name" required/>
                     <label class="form-label" for="firstname">First Name</label>
                 </div>
             </div>
             <div class="col-6">
                 <div class="form-floating">
-                    <input type="text" class="form-control form-control-sm" name="*{lastname}" id="lastname" placeholder="Your last name" required/>
+                    <input type="text" class="form-control form-control-sm" name="*{lasterfname}" id="lastname" placeholder="Your last name" required/>
                     <label class="form-label" for="lastname">Last Name</label>
                 </div>
             </div>
@@ -18,22 +18,82 @@
         <div class="row mb-3 mt-3">
             <div class="col-4">
                 <div class="form-floating">
-                    <input type="tel" class="form-control form-control-sm" name="*{firstname}" id="subject-mobile" placeholder="Subject Mobile" required/>
+                    <input type="tel" class="form-control form-control-sm" name="*{firsfwgtname}" id="subject-mobile" placeholder="Subject Mobile" required/>
                     <label class="form-label" for="subject-mobile">Mobile</label>
                 </div>
             </div>
             <div class="col-4">
                 <div class="form-floating">
-                    <input type="email" class="form-control form-control-sm" name="*{lastname}" id="subject-email" placeholder="Subject Email" required/>
+                    <input type="email" class="form-control form-control-sm" name="*{lasseetname}" id="subject-email" placeholder="Subject Email" required/>
                     <label class="form-label" for="subject-email">Email</label>
                 </div>
             </div>
             <div class="col-4">
                 <div class="form-floating">
-                    <input type="text" class="form-control form-control-sm" name="*{lastname}" id="subject-address" placeholder="Subject Address" required/>
+                    <input type="text" class="form-control form-control-sm" name="*{lasteeefname}" id="subject-address" placeholder="Subject Address" required/>
                     <label class="form-label" for="subject-address">Address</label>
                 </div>
             </div>
         </div>
+        <h5 class="pb-2 border-bottom">Main</h5>
+        <div class="form-floating mb-3 mt-3">
+            <input type="text" class="form-control form-control-sm" name="*{compabbnyName}" id="title" placeholder="Main title" required/>
+            <label class="form-label" for="title">Title</label>
+        </div>
+        <div class="form-floating mb-3 mt-3">
+            <textarea class="form-control form-control-sm" id="description" rows="2" maxlength="100" name="*{li}" placeholder="Description" required></textarea>
+            <label class="form-label" for="description">Description</label>
+        </div>
+        <div class="row mb-3 mt-3">
+            <div class="col-4">
+                <div class="form-floating">
+                    <input type="text" class="form-control form-control-sm" name="*{firdstname}" id="work-by" placeholder="Enter Work by" required/>
+                    <label class="form-label" for="work-by">Work by</label>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="form-floating">
+                    <input type="text" class="form-control form-control-sm" name="*{lastnafme}" id="assigned-to" placeholder=" Enter Work assigning person" required/>
+                    <label class="form-label" for="assigned-to">Assigned to</label>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="form-floating">
+                    <input type="text" class="form-control form-control-sm" name="*{lasgtname}" id="contact" placeholder="Enter contact" required/>
+                    <label class="form-label" for="contact">Contact</label>
+                </div>
+            </div>
+        </div>
+        <h5 class="pb-2 border-bottom">Progress <button type="button" id="addRow" class="btn btn-secondary btn-sm"><i class="fa-solid fa-plus"></i></button></h5>
+        <table class="table table-sm table-borderless">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Progress</th>
+                    <th scope="col">Note</th>
+                </tr>
+            </thead>
+            <tbody id="dynamicRows">
+                <tr>
+                    <th scope="row">1</th>
+                    <td>
+                        <input type="text" name="firstName" required class="form-control">
+                    </td>
+                    <td>
+                        <input type="text" name="lastName" required class="form-control">
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>
+                        <input type="text" name="firstName" required class="form-control">
+                    </td>
+                    <td>
+                        <input type="text" name="lastName" required class="form-control">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <button type="submit" class="btn btn-success mt-3">Submit</button>
     </form>
 </div>
