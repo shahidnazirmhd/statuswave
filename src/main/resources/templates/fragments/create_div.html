@@ -64,6 +64,26 @@
                 </div>
             </div>
         </div>
+        <div class="row mb-3 mt-3">
+            <div class="col-4">
+                <div class="form-floating">
+                    <input type="text" class="form-control" name="*{firdstnassme}" id="work-location" placeholder="Enter Work location" required/>
+                    <label class="form-label small" for="work-location">Work Location</label>
+                </div>
+            </div>
+           <div class="col-4">
+                <div class="form-floating">
+                    <input type="date" class="form-control" name="est-date" id="est-date" placeholder="Estimated Date of completion" required />
+                    <label class="form-label small" for="est-date">Completion Date</label>
+                </div>
+           </div>
+           <div class="col-4">
+            <div class="form-floating">
+                <input type="time" class="form-control" name="est-time" id="birthdaytime" placeholder="Estimated Time of completion" required />
+                <label class="form-label small" for="est-time">Completion Time</label>
+            </div>
+       </div>
+        </div>
         <h5 class="pb-2 border-bottom">Progress <button type="button" id="addRow" class="btn btn-secondary btn-sm"
             hx-get="fragments/component/progress-row" 
             hx-target="#last-row" 
