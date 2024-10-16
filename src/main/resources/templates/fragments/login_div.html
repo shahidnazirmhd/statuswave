@@ -13,12 +13,12 @@
     </div>                
     <form th:action="@{/login}" method="post">
         <div class="form-floating mb-3 mt-3">
-            <input type="text" class="form-control form-control-sm" name="username" id="user" placeholder="Enter your username" required/>
-            <label class="form-label" for="user">Username</label>
+            <input type="text" class="form-control" name="username" id="user" placeholder="Enter your username" required/>
+            <label class="form-label small" for="user">Username</label>
         </div>
         <div class="form-floating mb-3 mt-3">
-            <input type="password" class="form-control form-control-sm" name="password" id="pass" placeholder="Enter your password" required/>
-            <label class="form-label" for="pass">Password</label>
+            <input type="password" class="form-control" name="password" id="pass" placeholder="Enter your password" required/>
+            <label class="form-label small" for="pass">Password</label>
         </div>
         <div class="text-center">
             <input type="submit" class="btn btn-primary" value="Login"/>

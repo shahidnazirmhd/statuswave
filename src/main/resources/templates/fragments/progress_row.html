@@ -1,0 +1,10 @@
+<tr th:fragment="row">
+    <th scope="row">-</th>
+                    <td>
+                        <input type="text" name="firstName" required class="form-control">
+                    </td>
+                    <td>
+                        <input type="text" name="lastName" required class="form-control">
+                    </td>
+    <td><button type="button" hx-on:click="this.closest('tr').remove()" class="btn btn-danger btn-sm"><i class="fa-solid fa-xmark"></i></button></td>
+</tr>

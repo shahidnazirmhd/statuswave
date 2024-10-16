@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import in.snm.statuswave.common.HtmxValidator;
+import io.github.wimdeblauwe.htmx.spring.boot.mvc.HtmxRequest;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 
@@ -36,6 +38,13 @@ public class LandController {
         model.addAttribute("pageTitle", "History");
         model.addAttribute("fragmentName", "temp");
         return "land";
+    }
+
+
+    @GetMapping("/fragments/component/progress-row")
+    public String loginDiv(HtmxRequest htmxRequest) {
+        HtmxValidator.validateHtmxRequest(htmxRequest, "/app/create");
+        return "fragments/progress_row :: row";
     }
 
     
