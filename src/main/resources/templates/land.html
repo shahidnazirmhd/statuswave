@@ -7,7 +7,7 @@
           <aside th:replace="~{fragments/aside :: aside}"></aside>
           <!-- Main content -->
           <div class="col p-4 overflow-auto vh-100">
-             <div th:replace="('fragments/' + ${fragmentName}) :: (${fragmentName})"></div>
+             <div th:replace="~{('fragments/' + ${fragmentName}) :: (${fragmentName})}"></div>
           </div>
         </div>
       </div>

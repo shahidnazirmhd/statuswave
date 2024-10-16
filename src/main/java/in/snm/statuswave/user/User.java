@@ -14,6 +14,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import in.snm.statuswave.role.Role;
+import in.snm.statuswave.status.Status;
 
 import java.security.Principal;
 import java.time.LocalDateTime;
@@ -56,6 +57,13 @@ public class User implements UserDetails, Principal {
     @LastModifiedDate
     @Column(insertable = false)
     private LocalDateTime lastModifiedDate;
+
+
+
+    @OneToMany(mappedBy = "creator")
+    private List<Status> status;
+
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
