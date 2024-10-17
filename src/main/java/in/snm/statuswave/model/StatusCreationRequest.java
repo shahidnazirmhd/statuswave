@@ -52,7 +52,7 @@ public record StatusCreationRequest(
     LocalDate expectedWorkCompletionDate,
     
     @NotNull(message = "Expected work completion time cannot be null") 
-    LocalTime expectedWorkComletionTime,
+    LocalTime expectedWorkCompletionTime,
     
     @NotNull(message = "Progress name list cannot be null") 
     @Size(min = 2, message = "Progress name list must have at least 2 elements")

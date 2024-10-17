@@ -1,5 +1,8 @@
 <div th:fragment="create_div">
-    <div th:if="${not #lists.isEmpty(errorMessages)}" class="alert alert-danger">
+    <div th:if="${statusCreated}" class="alert alert-success" role="alert">
+        <p th:text="${statusCreated}"></p>
+    </div>
+    <div th:if="${not #lists.isEmpty(errorMessages)}" class="alert alert-danger" role="alert">
         <ul>
             <li th:each="error : ${errorMessages}" th:text="${error}"></li>
         </ul>
@@ -84,7 +87,7 @@
            </div>
            <div class="col-4">
             <div class="form-floating">
-                <input type="time" class="form-control" name="expectedWorkComletionTime" th:value="${errorStatusCreationRequest?.expectedWorkComletionTime()}" id="birthdaytime" placeholder="Estimated Time of completion" required />
+                <input type="time" class="form-control" name="expectedWorkCompletionTime" th:value="${errorStatusCreationRequest?.expectedWorkCompletionTime()}" id="birthdaytime" placeholder="Estimated Time of completion" required />
                 <label class="form-label small" for="est-time">Completion Time</label>
             </div>
        </div>

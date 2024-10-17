@@ -1,0 +1,26 @@
+<div class="container mt-5" th:fragment="status_list_div">
+    <h2>All Statuses with Progress</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Subject First Name</th>
+                <th>Subject Last Name</th>
+                <th>Progress Entries</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="status : ${statuses}">
+                <td th:text="${status.id}"></td>
+                <td th:text="${status.subjectFirstName}"></td>
+                <td th:text="${status.subjectLastName}"></td>
+                <td>
+                    <ul>
+                        <li th:each="progress : ${status.progresses}" th:text="${progress.progressName} + ': ' + ${progress.note}"></li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+

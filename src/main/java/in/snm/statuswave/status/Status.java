@@ -8,6 +8,7 @@ import java.util.List;
 import in.snm.statuswave.common.BaseEntity;
 import in.snm.statuswave.user.User;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -44,7 +45,7 @@ public class Status extends BaseEntity {
     private String workLocation;
     private LocalDate expectedWorkCompletionDate;
     private LocalTime expectedWorkComletionTime;
-    @OneToMany(mappedBy = "status")
+    @OneToMany(mappedBy = "status", fetch = FetchType.EAGER)
     private List<StatusProgress> progresses;
 
     @ManyToOne

@@ -7,7 +7,7 @@ services:
       PGADMIN_DEFAULT_EMAIL: admin@pgadmin.org
       PGADMIN_DEFAULT_PASSWORD: passpgadmin     
       PGADMIN_CONFIG_WTF_CSRF_HEADERS: '["Referer", "Origin"]'
-      PGADMIN_CONFIG_WTF_CSRF_ENABLED: 'False'
+      #PGADMIN_CONFIG_WTF_CSRF_ENABLED: 'False'
     volumes:
       - pgadmin-data:/var/lib/pgadmin
     ports:
@@ -23,7 +23,7 @@ services:
       POSTGRES_USER: sa
       POSTGRES_PASSWORD: passpgsql
       POSTGRES_DB: statuswave
-      #POSTGRES_HOST_AUTH_METHOD: "trust"
+      POSTGRES_HOST_AUTH_METHOD: "trust"
     volumes:                 
       - pg-data:/var/lib/postgresql/data
     ports:

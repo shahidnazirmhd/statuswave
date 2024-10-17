@@ -3,6 +3,7 @@ package in.snm.statuswave.land;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,12 +12,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import in.snm.statuswave.common.HtmxValidator;
 import in.snm.statuswave.model.StatusCreationRequest;
 import in.snm.statuswave.status.Status;
+import in.snm.statuswave.status.StatusService;
 import io.github.wimdeblauwe.htmx.spring.boot.mvc.HtmxRequest;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -26,6 +27,9 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("app")
 @RequiredArgsConstructor
 public class LandController {
+
+    private final StatusService statusService;
+
     @GetMapping("dashboard")
     public String dashboardView(HttpServletRequest request, Model model){
         model.addAttribute("pageTitle", "Dashboard");
@@ -42,7 +46,9 @@ public class LandController {
     @GetMapping("active")
     public String activeView(HttpServletRequest request, Model model){
         model.addAttribute("pageTitle", "Active");
-        model.addAttribute("fragmentName", "temp");
+        model.addAttribute("fragmentName", "status_list_div");
+        List<Status> statuses = statusService.getAllStatuses();
+        model.addAttribute("statuses", statuses);
         return "land";
     }
     @GetMapping("history")
@@ -54,7 +60,7 @@ public class LandController {
 
 
     @PostMapping("/status")
-    public String saveStatus(@Valid @ModelAttribute StatusCreationRequest statusCreationRequest, 
+    public String saveStatus(Authentication connectedUser, @Valid @ModelAttribute StatusCreationRequest statusCreationRequest, 
                              BindingResult bindingResult, RedirectAttributes redirectAttributes) {
     if (bindingResult.hasErrors()) {
         List<String> errorMessages = new ArrayList<>();
@@ -66,7 +72,9 @@ public class LandController {
         return "redirect:/app/create";
     }
     
-    System.out.println(statusCreationRequest);
+    Long savedStatusId = statusService.saveStatus(statusCreationRequest, connectedUser);
+
+    redirectAttributes.addFlashAttribute("statusCreated", "Status Created Successfully | STATUS_ID_" + savedStatusId );
 
     return "redirect:/app/create";
         
