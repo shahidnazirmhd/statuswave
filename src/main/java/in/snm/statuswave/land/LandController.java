@@ -1,18 +1,25 @@
 package in.snm.statuswave.land;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import in.snm.statuswave.common.HtmxValidator;
+import in.snm.statuswave.model.StatusCreationRequest;
 import in.snm.statuswave.status.Status;
 import io.github.wimdeblauwe.htmx.spring.boot.mvc.HtmxRequest;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -47,18 +54,22 @@ public class LandController {
 
 
     @PostMapping("/status")
-    public String saveStatus(@ModelAttribute Status status, Model model) {
-
-        if (status != null) {
-            System.out.println(status);
-        } else {
-            System.out.println("STATUS CREATION FAILED");
+    public String saveStatus(@Valid @ModelAttribute StatusCreationRequest statusCreationRequest, 
+                             BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    if (bindingResult.hasErrors()) {
+        List<String> errorMessages = new ArrayList<>();
+        for (ObjectError error : bindingResult.getAllErrors()) {
+            errorMessages.add(error.getDefaultMessage());
         }
+        redirectAttributes.addFlashAttribute("errorMessages", errorMessages);
+        redirectAttributes.addFlashAttribute("errorStatusCreationRequest", statusCreationRequest);
+        return "redirect:/app/create";
+    }
+    
+    System.out.println(statusCreationRequest);
 
-        model.addAttribute("pageTitle", "Create");
-        model.addAttribute("fragmentName", "create_div");
-        model.addAttribute("status", new Status());
-        return "land";
+    return "redirect:/app/create";
+        
     }
 
 
