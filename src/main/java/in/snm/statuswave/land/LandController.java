@@ -59,28 +59,6 @@ public class LandController {
     }
 
 
-    @PostMapping("/status")
-    public String saveStatus(Authentication connectedUser, @Valid @ModelAttribute StatusCreationRequest statusCreationRequest, 
-                             BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-    if (bindingResult.hasErrors()) {
-        List<String> errorMessages = new ArrayList<>();
-        for (ObjectError error : bindingResult.getAllErrors()) {
-            errorMessages.add(error.getDefaultMessage());
-        }
-        redirectAttributes.addFlashAttribute("errorMessages", errorMessages);
-        redirectAttributes.addFlashAttribute("errorStatusCreationRequest", statusCreationRequest);
-        return "redirect:/app/create";
-    }
-    
-    Long savedStatusId = statusService.saveStatus(statusCreationRequest, connectedUser);
-
-    redirectAttributes.addFlashAttribute("statusCreated", "Status Created Successfully | STATUS_ID_" + savedStatusId );
-
-    return "redirect:/app/create";
-        
-    }
-
-
     @GetMapping("/fragments/component/progress-row")
     public String loginDiv(HtmxRequest htmxRequest) {
         HtmxValidator.validateHtmxRequest(htmxRequest, "/app/create");

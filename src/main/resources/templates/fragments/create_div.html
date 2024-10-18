@@ -7,7 +7,7 @@
             <li th:each="error : ${errorMessages}" th:text="${error}"></li>
         </ul>
     </div>
-    <form th:action="@{/app/status}" method="post">
+    <form th:action="@{/status/create}" method="post">
         <h5 class="pb-2 border-bottom">Subject</h5>
         <div class="row mb-3 mt-3">
             <div class="col-6">
