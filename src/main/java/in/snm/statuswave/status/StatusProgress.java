@@ -26,6 +26,10 @@ public class StatusProgress extends BaseEntity {
     private Long id;
     private String progressName;
     private String note;
+    private Boolean isStarted;
+    private Boolean isOnHold;
+    private Boolean isOnWork;
+    private Boolean isCompleted;
 
     @ManyToOne
     @JoinColumn(name = "status_id")

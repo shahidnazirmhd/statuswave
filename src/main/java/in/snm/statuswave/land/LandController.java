@@ -43,8 +43,8 @@ public class LandController {
         model.addAttribute("status", new Status());
         return "land";
     }
-    @GetMapping("active")
-    public String activeView(HttpServletRequest request, Model model){
+    @GetMapping("control")
+    public String controlView(HttpServletRequest request, Model model){
         model.addAttribute("pageTitle", "Active");
         model.addAttribute("fragmentName", "status_list_div");
         List<Status> statuses = statusService.getAllStatuses();

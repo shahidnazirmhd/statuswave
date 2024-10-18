@@ -17,6 +17,10 @@ public class StatusProgressMapper {
                         .progressName(progressNames.get(i))
                         .note(notes.get(i))
                         .status(Status.builder().id(statusId).build())
+                        .isStarted(false)
+                        .isOnHold(false)
+                        .isOnWork(false)
+                        .isCompleted(false)
                         .build();
         statusProgressList.add(statusProgress);
     }
