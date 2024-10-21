@@ -7,7 +7,7 @@ services:
       PGADMIN_DEFAULT_EMAIL: admin@pgadmin.org
       PGADMIN_DEFAULT_PASSWORD: passpgadmin     
       PGADMIN_CONFIG_WTF_CSRF_HEADERS: '["Referer", "Origin"]'
-      #PGADMIN_CONFIG_WTF_CSRF_ENABLED: 'False'
+      PGADMIN_CONFIG_WTF_CSRF_ENABLED: 'False'
     volumes:
       - pgadmin-data:/var/lib/pgadmin
     ports:
